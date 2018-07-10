@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-getToolbarActions() {
+getToolbarActions(BuildContext context) {
   return <Widget>[
     IconButton(
       icon: Icon(Icons.search),
@@ -11,7 +11,7 @@ getToolbarActions() {
     IconButton(
       icon: Icon(Icons.shopping_cart),
       onPressed: () {
-        print('Tune action pressed');
+        Navigator.of(context).pushNamed('/cart');
       },
     )
   ];

@@ -14,7 +14,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text('Dashboard'),
-          actions: getToolbarActions(),
+          actions: getToolbarActions(context),
           automaticallyImplyLeading: false),
       body: GridView.count(
         crossAxisCount: 2,
@@ -45,7 +45,7 @@ List<Card> _buildGridCards(int count, BuildContext context) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Fucking food',
+                      'Delicious food',
                       style: theme.textTheme.title,
                       maxLines: 1,
                     ),

@@ -16,7 +16,7 @@ class _ProfileViewState extends State<ProfileView> {
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
             title: Text('Profile'),
-            actions: getToolbarActions()),
+            actions: getToolbarActions(context)),
         body: ListView(
           children: <Widget>[
             Column(

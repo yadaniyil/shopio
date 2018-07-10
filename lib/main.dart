@@ -2,5 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'app.dart';
 
-void main() => runApp(new ShopApp());
-
+void main() {
+  MaterialPageRoute.debugEnableFadingRoutes = true;
+  runApp(new ShopApp());
+}

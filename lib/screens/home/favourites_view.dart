@@ -15,14 +15,14 @@ class _FavouritesViewState extends State<FavouritesView> {
         title: Text('Favourites'),
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        actions: getToolbarActions()
+        actions: getToolbarActions(context)
       ),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 140.0),
           Icon(Icons.favorite_border, size: 120.0, color: Colors.red),
           SizedBox(height: 40.0),
-          Text('You do not have favourite items yet', textAlign: TextAlign.center)
+          Text('You do not have favourite items yet', textAlign: TextAlign.center, textScaleFactor: 1.2,)
         ],
       ),
     );

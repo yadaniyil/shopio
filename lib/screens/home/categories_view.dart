@@ -14,7 +14,7 @@ class _CategoriesViewState extends State<CategoriesView> {
       appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text('Categories'),
-          actions: getToolbarActions(),
+          actions: getToolbarActions(context),
           automaticallyImplyLeading: false),
       body: ListView(
         children: <Widget>[
