@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'screens/start/start_screen.dart';
 import 'screens/home/home_screen.dart';
-import 'screens/cart/CartScreen.dart';
+import 'screens/cart/cart_screen.dart';
+import 'screens/product/product_screen.dart';
 import 'colors.dart';
 
 class ShopApp extends StatefulWidget {
@@ -19,7 +20,8 @@ class _ShopAppState extends State<ShopApp> {
       home: StartScreen(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => HomeScreen(),
-        '/cart': (BuildContext context) => CartScreen()
+        '/cart': (BuildContext context) => CartScreen(),
+        '/product': (BuildContext context) => ProductScreen()
       },
     );
   }

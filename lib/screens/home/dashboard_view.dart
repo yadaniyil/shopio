@@ -31,7 +31,9 @@ List<Card> _buildGridCards(int count, BuildContext context) {
   List<Card> cards = List.generate(
     count,
     (int index) => Card(
-          child: Column(
+      child: GestureDetector(
+        onTap: () { Navigator.of(context).pushNamed('/product'); },
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AspectRatio(
@@ -56,6 +58,8 @@ List<Card> _buildGridCards(int count, BuildContext context) {
               ),
             ],
           ),
+      )
+          
         ),
   );
 
