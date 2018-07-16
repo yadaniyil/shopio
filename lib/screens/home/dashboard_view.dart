@@ -26,20 +26,25 @@ class _DashboardViewState extends State<DashboardView> {
   }
 }
 
+Widget get foodPicture {
+  return Image.asset('assets/salmon-dish-food-meal.jpeg', fit: BoxFit.fitWidth);
+}
+
 List<Card> _buildGridCards(int count, BuildContext context) {
   final ThemeData theme = Theme.of(context);
   List<Card> cards = List.generate(
     count,
     (int index) => Card(
-      child: GestureDetector(
-        onTap: () { Navigator.of(context).pushNamed('/product'); },
-        child: Column(
+            child: InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed('/product');
+          },
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AspectRatio(
                 aspectRatio: 18.0 / 11.0,
-                child: Image.asset('assets/salmon-dish-food-meal.jpeg',
-                    fit: BoxFit.fitWidth),
+                child: foodPicture,
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
@@ -58,9 +63,7 @@ List<Card> _buildGridCards(int count, BuildContext context) {
               ),
             ],
           ),
-      )
-          
-        ),
+        )),
   );
 
   return cards;

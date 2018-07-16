@@ -4,5 +4,5 @@ import 'app.dart';
 
 void main() {
   MaterialPageRoute.debugEnableFadingRoutes = true;
-  runApp(new ShopApp());
+  runApp(ShopApp());
 }

@@ -33,7 +33,7 @@ ThemeData _buildShopTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
     accentColor: Colors.blueAccent,
-    primaryColor: Colors.blueAccent,
+    primaryColor: Colors.white,
     buttonColor: kShrinePink100,
     scaffoldBackgroundColor: kShrineBackgroundWhite,
     cardColor: kShrineBackgroundWhite,
