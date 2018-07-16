@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: _homeScreenItems[_currentBottomBarIndex].content,
       bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.blue,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentBottomBarIndex,
         items: _homeScreenItems

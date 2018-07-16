@@ -16,7 +16,7 @@ class _ShopAppState extends State<ShopApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shop',
-      theme: _kShopTheme,
+      theme: shopTheme,
       home: StartScreen(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => HomeScreen(),
@@ -27,18 +27,18 @@ class _ShopAppState extends State<ShopApp> {
   }
 }
 
-final ThemeData _kShopTheme = _buildShopTheme();
+final ThemeData shopTheme = _buildShopTheme();
 
 ThemeData _buildShopTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    accentColor: Colors.blueAccent,
+    accentColor: secondaryColor,
     primaryColor: Colors.white,
-    buttonColor: kShrinePink100,
-    scaffoldBackgroundColor: kShrineBackgroundWhite,
-    cardColor: kShrineBackgroundWhite,
-    textSelectionColor: kShrinePink100,
-    errorColor: kShrineErrorRed,
+    buttonColor: secondaryColor,
+    scaffoldBackgroundColor: Colors.white,
+    cardColor: Colors.white,
+    textSelectionColor: textSelectionColor,
+    errorColor: errorRedColor,
     textTheme: _buildShopTextTheme(base.textTheme),
     primaryTextTheme: _buildShopTextTheme(base.primaryTextTheme),
     accentTextTheme: _buildShopTextTheme(base.accentTextTheme),
@@ -61,7 +61,7 @@ TextTheme _buildShopTextTheme(TextTheme base) {
         ),
       )
       .apply(
-        displayColor: kShrineBrown900,
-        bodyColor: kShrineBrown900,
+        displayColor: Colors.black,
+        bodyColor: Colors.black,
       );
 }
