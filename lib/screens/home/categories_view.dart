@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'toolbar_actions.dart';
 import '../../model/category_model.dart';
 
+
+
 class CategoriesView extends StatefulWidget {
   @override
   _CategoriesViewState createState() => _CategoriesViewState();
@@ -17,24 +19,25 @@ class _CategoriesViewState extends State<CategoriesView> {
   @override
   void initState() {
     super.initState();
-    loadCategories(categories);
+    loadCategories();
   }
 
-  showLoadingDialog(List categories) {
+  // region UI
+  showLoadingDialog() {
     return categories.length == 0;
   }
 
-  getBody(List categories) {
-    if (showLoadingDialog(categories)) {
+  getBody() {
+    if (showLoadingDialog()) {
       return getProgressView();
     } else {
-      return getCategoriesListView(categories);
+      return getCategoriesListView();
     }
   }
 
   getProgressView() => Center(child: CircularProgressIndicator());
 
-  ListView getCategoriesListView(List categories) => ListView.builder(
+  ListView getCategoriesListView() => ListView.builder(
       itemCount: categories.length,
       itemBuilder: (BuildContext context, int position) {
         return getRow(position, context, categories);
@@ -51,8 +54,9 @@ class _CategoriesViewState extends State<CategoriesView> {
         ),
         title: Text("${categories[i].name}"));
   }
+  // endregion UI
 
-  loadCategories(List categories) async {
+  loadCategories() async {
     String dataURL = "https://www.themealdb.com/api/json/v1/1/categories.php";
     http.Response response = await http.get(dataURL);
     List categoriesJson = json.decode(response.body)['categories'];
@@ -71,7 +75,7 @@ class _CategoriesViewState extends State<CategoriesView> {
           title: Text('Categories'),
           actions: getToolbarActions(context),
           automaticallyImplyLeading: false),
-      body: getBody(categories),
+      body: getBody(),
     );
   }
 }

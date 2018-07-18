@@ -8,10 +8,10 @@ part of 'category_model.dart';
 
 CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
   return new CategoryModel(
-      json['idCategory'] as String,
-      json['strCategory'] as String,
-      json['strCategoryThumb'] as String,
-      json['strCategoryDescription'] as String);
+      id: json['idCategory'] as String,
+      name: json['strCategory'] as String,
+      imageLink: json['strCategoryThumb'] as String,
+      description: json['strCategoryDescription'] as String);
 }
 
 abstract class _$CategoryModelSerializerMixin {

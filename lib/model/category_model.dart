@@ -4,7 +4,7 @@ part 'category_model.g.dart';
 
 @JsonSerializable()
 class CategoryModel extends Object with _$CategoryModelSerializerMixin {
-  CategoryModel(this.id, this.name, this.imageLink, this.description);
+  CategoryModel({this.id, this.name, this.imageLink, this.description});
 
   @JsonKey(name: 'idCategory')
   final String id;
