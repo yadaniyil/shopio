@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shop/model/product_model.dart';
 
@@ -29,11 +31,14 @@ class _DashboardViewState extends State<DashboardView> {
     if (showLoadingDialog()) {
       return getProgressView();
     } else {
-      return GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(context),
+      return RefreshIndicator(
+          child: GridView.count(
+            crossAxisCount: 2,
+            padding: EdgeInsets.all(16.0),
+            childAspectRatio: 8.0 / 9.0,
+            children: _buildGridCards(context),
+          ),
+          onRefresh: refreshLatestProducts
       );
     }
   }
@@ -95,6 +100,11 @@ class _DashboardViewState extends State<DashboardView> {
       categoriesJson
           .forEach((json) => products.add(ProductModel.fromJson(json)));
     });
+  }
+
+  Future<Null> refreshLatestProducts() async {
+    await loadLatestProducts();
+    return null;
   }
 
   @override
