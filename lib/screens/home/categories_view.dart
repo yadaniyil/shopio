@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop/presentation/cart_and_search_toolbar.dart';
 
-import 'toolbar_actions.dart';
 import '../../models/category_model.dart';
 
 
@@ -70,11 +70,7 @@ class _CategoriesViewState extends State<CategoriesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text('Categories'),
-          actions: getToolbarActions(context),
-          automaticallyImplyLeading: false),
+      appBar: cartAndSearchToolbar('Categories', context),
       body: getBody(),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'toolbar_actions.dart';
+import 'package:shop/presentation/cart_and_search_toolbar.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -8,15 +7,10 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            backgroundColor: Colors.white,
-            automaticallyImplyLeading: false,
-            title: Text('Profile'),
-            actions: getToolbarActions(context)),
+        appBar: cartAndSearchToolbar('Profile', context),
         body: ListView(
           children: <Widget>[
             Column(

@@ -4,7 +4,7 @@ import 'package:shop/containers/active_tab.dart';
 import 'package:shop/containers/tab_selector.dart';
 import 'package:shop/models/app_tab.dart';
 
-import 'dashboard_view.dart';
+import 'package:shop/containers/dashboard_view.dart';
 import 'categories_view.dart';
 import 'favourites_view.dart';
 import 'profile_view.dart';

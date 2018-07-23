@@ -10,4 +10,6 @@ class AppKeys {
   static final categoriesTab = const Key('__categoriesTab__');
   static final favouritesTab = const Key('__favouritesTab__');
   static final profileTab = const Key('__profileTab__');
+
+  static final popularProductsLoading = const Key('__popularProductsLoading__');
 }

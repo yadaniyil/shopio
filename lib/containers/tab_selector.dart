@@ -25,7 +25,7 @@ class TabSelector extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home, key: AppKeys.homeTab),
-              title: Text('Home'),
+              title: Text('Dashboard'),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list, key: AppKeys.categoriesTab),
