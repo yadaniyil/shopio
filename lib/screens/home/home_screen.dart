@@ -1,70 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:shop/app_keys.dart';
+import 'package:shop/containers/active_tab.dart';
+import 'package:shop/containers/tab_selector.dart';
+import 'package:shop/models/app_tab.dart';
 
 import 'dashboard_view.dart';
 import 'categories_view.dart';
 import 'favourites_view.dart';
 import 'profile_view.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentBottomBarIndex = 0;
-  List<HomeScreenItem> _homeScreenItems;
-
-  @override
-  void initState() {
-    _homeScreenItems = [
-      HomeScreenItem(
-          icon: Icon(Icons.home),
-          title: Text('Dashboard'),
-          content: DashboardView()),
-      HomeScreenItem(
-          icon: Icon(Icons.list),
-          title: Text('Categories'),
-          content: CategoriesView()),
-      HomeScreenItem(
-          icon: Icon(Icons.favorite),
-          title: Text('Favourites'),
-          content: FavouritesView()),
-      HomeScreenItem(
-          icon: Icon(Icons.account_circle),
-          title: Text('Profile'),
-          content: ProfileView())
-    ];
-    super.initState();
-  }
-
-  void _bottomBarItemSelected(int index) {
-    setState(() {
-      _currentBottomBarIndex = index;
-    });
-  }
+class HomeScreen extends StatelessWidget {
+  HomeScreen() : super(key: AppKeys.homeScreen);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _homeScreenItems[_currentBottomBarIndex].content,
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.blue,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _currentBottomBarIndex,
-        items: _homeScreenItems
-            .map((HomeScreenItem item) => item.barItem)
-            .toList(),
-        onTap: _bottomBarItemSelected,
-      ),
-    );
+    return ActiveTab(builder: (context, activeTab) {
+      return Scaffold(
+        body: _getBody(activeTab),
+        bottomNavigationBar: TabSelector(),
+      );
+    });
   }
-}
 
-class HomeScreenItem {
-  final BottomNavigationBarItem barItem;
-  final Widget content;
-
-  HomeScreenItem({Widget icon, Widget title, Widget content})
-      : barItem = BottomNavigationBarItem(icon: icon, title: title),
-        content = content;
+  Widget _getBody(AppTab activeTab) {
+    switch (activeTab) {
+      case AppTab.home: return DashboardView();
+      case AppTab.categories: return CategoriesView();
+      case AppTab.favourite: return FavouritesView();
+      case AppTab.profile: return ProfileView();
+      default: return DashboardView();
+    }
+  }
 }

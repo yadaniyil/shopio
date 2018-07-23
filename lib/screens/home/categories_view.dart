@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'toolbar_actions.dart';
-import '../../model/category_model.dart';
+import '../../models/category_model.dart';
 
 
 
