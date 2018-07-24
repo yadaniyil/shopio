@@ -173,4 +173,8 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
       this.measure18,
       this.measure19,
       this.measure20});
+
+  String getPrice() {
+    return '\$12.00 ';
+  }
 }
