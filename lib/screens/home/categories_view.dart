@@ -6,8 +6,6 @@ import 'package:shop/presentation/cart_and_search_toolbar.dart';
 
 import '../../models/category_model.dart';
 
-
-
 class CategoriesView extends StatefulWidget {
   @override
   _CategoriesViewState createState() => _CategoriesViewState();
@@ -38,22 +36,28 @@ class _CategoriesViewState extends State<CategoriesView> {
   getProgressView() => Center(child: CircularProgressIndicator());
 
   ListView getCategoriesListView() => ListView.builder(
+      padding: EdgeInsets.only(top: 10.0),
       itemCount: categories.length,
       itemBuilder: (BuildContext context, int position) {
         return getRow(position, context, categories);
       });
 
   Widget getRow(int i, BuildContext context, List categories) {
-    return ListTile(
-        onTap: () {
-          Navigator.of(context).pushNamed('/home');
-        },
-        leading: Image.network(
-          '${categories[i].imageLink}',
-          width: 80.0,
-        ),
-        title: Text("${categories[i].name}"));
+    return Column(children: <Widget>[
+      ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+          onTap: () {
+            Navigator.of(context).pushNamed('/home');
+          },
+          leading: Image.network(
+            '${categories[i].imageLink}',
+            width: 80.0,
+          ),
+          title: Text("${categories[i].name}")),
+      Divider()
+    ]);
   }
+
   // endregion UI
 
   loadCategories() async {
