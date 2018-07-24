@@ -37,7 +37,7 @@ class ShopApp extends StatelessWidget {
           routes: {
             Routes.home: (context) {
               return StoreBuilder<AppState>(
-                onInit: (store) => store.dispatch(LoadPopularProductsAction()),
+                onInit: (store) => store.dispatch(InitialLoadAction()),
                 builder: (context, store) => HomeScreen(),
               );
             },

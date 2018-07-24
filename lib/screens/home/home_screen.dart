@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shop/app_keys.dart';
 import 'package:shop/containers/active_tab.dart';
+import 'package:shop/containers/categories_view.dart';
 import 'package:shop/containers/tab_selector.dart';
 import 'package:shop/models/app_tab.dart';
 
 import 'package:shop/containers/dashboard_view.dart';
-import 'categories_view.dart';
+import 'package:shop/presentation/categories_list.dart';
 import 'favourites_view.dart';
 import 'profile_view.dart';
 

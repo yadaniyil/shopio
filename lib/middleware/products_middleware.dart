@@ -9,18 +9,18 @@ import 'package:shop/models/app_state.dart';
 List<Middleware<AppState>> createProductsMiddleware([
   ProductsRepository repository = const ProductsRepositoryImpl(),
 ]) {
-  final loadPopularProducts = _createLoadPopularProducts(repository);
+  final initialLoad = _createLoadPopularProductsAndCategories(repository);
   final refreshPopularProducts = _createRefreshPopularProducts(repository);
 
   return [
     LoggingMiddleware.printer(),
-    TypedMiddleware<AppState, LoadPopularProductsAction>(loadPopularProducts),
+    TypedMiddleware<AppState, InitialLoadAction>(initialLoad),
     TypedMiddleware<AppState, RefreshPopularProductsAction>(
         refreshPopularProducts),
   ];
 }
 
-Middleware<AppState> _createLoadPopularProducts(ProductsRepository repository) {
+Middleware<AppState> _createLoadPopularProductsAndCategories(ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     repository.loadPopularProducts().then(
       (products) {
@@ -29,6 +29,14 @@ Middleware<AppState> _createLoadPopularProducts(ProductsRepository repository) {
         );
       },
     ).catchError((_) => store.dispatch(PopularProductsNotLoadedAction()));
+
+    repository.loadCategories().then(
+          (categories) {
+        store.dispatch(
+          CategoriesLoadedAction(categories),
+        );
+      },
+    ).catchError((_) => store.dispatch(CategoriesNotLoadedAction()));
 
     next(action);
   };
