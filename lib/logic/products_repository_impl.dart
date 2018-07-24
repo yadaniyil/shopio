@@ -16,6 +16,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
     List categoriesJson = json.decode(response.body)['meals'];
     List<ProductModel> products = List();
     categoriesJson.forEach((json) => products.add(ProductModel.fromJson(json)));
+
     return products;
   }
 }
