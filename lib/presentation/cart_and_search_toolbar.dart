@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-AppBar cartAndSearchToolbar(String text, BuildContext context) {
+AppBar cartAndSearchToolbar(
+    {String title, BuildContext context, bool implyLeading = false}) {
   return AppBar(
       backgroundColor: Colors.white,
-      automaticallyImplyLeading: false,
-      title: Text(text),
+      automaticallyImplyLeading: implyLeading,
+      title: Text(title),
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.search),

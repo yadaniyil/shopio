@@ -17,7 +17,7 @@ class DashboardView extends StatelessWidget {
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
         return Scaffold(
-          appBar: cartAndSearchToolbar('Popular now', context),
+          appBar: cartAndSearchToolbar(title: 'Popular now', context: context),
           body: PopularProductsList(
               popularProducts: vm.popularProducts,
               onPopularProductsRefresh: vm.onPopularProductsRefresh),

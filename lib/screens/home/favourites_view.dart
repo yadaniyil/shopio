@@ -10,7 +10,7 @@ class _FavouritesViewState extends State<FavouritesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: cartAndSearchToolbar('Favourites', context),
+      appBar: cartAndSearchToolbar(title: 'Favourites', context: context),
       body: ListView(
         children: <Widget>[
           SizedBox(height: 140.0),

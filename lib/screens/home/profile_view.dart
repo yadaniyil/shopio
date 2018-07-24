@@ -10,7 +10,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: cartAndSearchToolbar('Profile', context),
+        appBar: cartAndSearchToolbar(title: 'Profile', context: context),
         body: ListView(
           children: <Widget>[
             Column(

@@ -3,6 +3,7 @@ import 'package:shop/app_keys.dart';
 import 'package:shop/containers/app_loading.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/loading_indicator.dart';
+import 'package:shop/screens/product/product_screen.dart';
 
 class PopularProductsList extends StatelessWidget {
   final List<ProductModel> popularProducts;
@@ -45,7 +46,10 @@ class PopularProductsList extends StatelessWidget {
       (int index) => Card(
               child: InkWell(
             onTap: () {
-              Navigator.of(context).pushNamed('/product');
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => ProductScreen(
+                        product: products[index],
+                      )));
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,6 +82,9 @@ class PopularProductsList extends StatelessWidget {
   }
 
   Widget foodPicture(products, int index) {
-    return Image.network(products[index].imageLink, fit: BoxFit.fitWidth);
+    return Hero(
+      child: Image.network(products[index].imageLink, fit: BoxFit.fitWidth),
+      tag: '${products[index].id}_hero_tag',
+    );
   }
 }
