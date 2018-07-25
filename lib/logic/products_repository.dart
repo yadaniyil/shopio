@@ -10,4 +10,8 @@ abstract class ProductsRepository {
   Future<List<ProductModel>> loadPopularProducts();
 
   Future<List<CategoryModel>> loadCategories();
+
+  Future<List<ProductModel>> loadFavouriteProducts();
+
+  Future<ProductModel> downloadProductWithId(String id);
 }

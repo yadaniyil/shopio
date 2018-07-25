@@ -14,12 +14,14 @@ List<Middleware<AppState>> createProductsMiddleware([
 ]) {
   final initialLoad = _createLoadPopularProductsAndCategories(repository);
   final refreshPopularProducts = _createRefreshPopularProducts(repository);
+  final loadFavouriteProducts = _createLoadFavouriteProducts(repository);
 
   return [
     LoggingMiddleware.printer(),
     TypedMiddleware<AppState, InitialLoadAction>(initialLoad),
     TypedMiddleware<AppState, RefreshPopularProductsAction>(
         refreshPopularProducts),
+    TypedMiddleware<AppState, LoadFavouritesAction>(loadFavouriteProducts),
   ];
 }
 
@@ -64,6 +66,24 @@ Middleware<AppState> _createRefreshPopularProducts(
       ).catchError((_) {
         store.dispatch(PopularProductsNotRefreshedAction());
         action.completer.complete();
+      });
+    }
+    next(action);
+  };
+}
+
+Middleware<AppState> _createLoadFavouriteProducts(
+    ProductsRepository repository) {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    if (action is RefreshPopularProductsAction) {
+      repository.loadFavouriteProducts().then(
+        (favourites) {
+          store.dispatch(
+            FavouritesLoadedAction(favourites),
+          );
+        },
+      ).catchError((_) {
+        store.dispatch(FavouritesNotLoadedAction());
       });
     }
     next(action);
