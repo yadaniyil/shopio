@@ -1,10 +1,13 @@
+import 'dart:async';
+
 import 'package:redux/redux.dart';
-import 'package:redux_logging/redux_logging.dart';
 import 'package:redux_logging/redux_logging.dart';
 import 'package:shop/actions/actions.dart';
 import 'package:shop/logic/products_repository_impl.dart';
 import 'package:shop/logic/products_repository.dart';
 import 'package:shop/models/app_state.dart';
+import 'package:shop/models/category_model.dart';
+import 'package:shop/models/product_model.dart';
 
 List<Middleware<AppState>> createProductsMiddleware([
   ProductsRepository repository = const ProductsRepositoryImpl(),
@@ -20,26 +23,31 @@ List<Middleware<AppState>> createProductsMiddleware([
   ];
 }
 
-Middleware<AppState> _createLoadPopularProductsAndCategories(ProductsRepository repository) {
+Middleware<AppState> _createLoadPopularProductsAndCategories(
+    ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    repository.loadPopularProducts().then(
-      (products) {
-        store.dispatch(
-          PopularProductsLoadedAction(products),
-        );
-      },
-    ).catchError((_) => store.dispatch(PopularProductsNotLoadedAction()));
-
-    repository.loadCategories().then(
-          (categories) {
-        store.dispatch(
-          CategoriesLoadedAction(categories),
-        );
-      },
-    ).catchError((_) => store.dispatch(CategoriesNotLoadedAction()));
+    Future
+        .wait([repository.loadPopularProducts(), repository.loadCategories()])
+        .then((List responses) => triggerActions(responses, store))
+        .catchError((e) => store.dispatch(InitialNotLoadedAction()));
 
     next(action);
   };
+}
+
+triggerActions(List responses, Store<AppState> store) {
+  List<ProductModel> popularProducts = List();
+  List<CategoryModel> categories = List();
+
+  if (responses[0] is List<ProductModel>) {
+    popularProducts.addAll(responses[0]);
+    categories.addAll(responses[1]);
+  } else {
+    popularProducts.addAll(responses[1]);
+    categories.addAll(responses[0]);
+  }
+
+  store.dispatch(InitialLoadedAction(popularProducts, categories));
 }
 
 Middleware<AppState> _createRefreshPopularProducts(

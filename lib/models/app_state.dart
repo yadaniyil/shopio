@@ -5,27 +5,36 @@ import 'package:shop/models/product_model.dart';
 
 @immutable
 class AppState {
-  final bool isLoading;
+  final bool isInitialLoading;
   final List<ProductModel> popularProducts;
   final List<CategoryModel> categories;
+
+  final bool isFavouritesLoading;
+  final List<ProductModel> favouriteProducts;
   final AppTab activeTab;
 
   AppState(
-      {this.isLoading = false,
+      {this.isInitialLoading = false,
       this.popularProducts = const [],
+      this.isFavouritesLoading = false,
+      this.favouriteProducts = const [],
       this.categories = const [],
       this.activeTab = AppTab.home});
 
-  factory AppState.loading() => AppState(isLoading: true);
+  factory AppState.initialLoading() => AppState(isInitialLoading: true);
 
   AppState copyWith(
-      {bool isLoading,
+      {bool isInitialLoading,
       List<ProductModel> popularProducts,
+      bool isFavouritesLoading,
+      List<ProductModel> favouriteProducts,
       List<CategoryModel> categories,
       AppTab activeTab}) {
     return AppState(
-        isLoading: isLoading ?? this.isLoading,
+        isInitialLoading: isInitialLoading ?? this.isInitialLoading,
+        isFavouritesLoading: isFavouritesLoading ?? this.isFavouritesLoading,
         popularProducts: popularProducts ?? this.popularProducts,
+        favouriteProducts: favouriteProducts ?? this.favouriteProducts,
         categories: categories ?? this.categories,
         activeTab: activeTab ?? this.activeTab);
   }
@@ -35,21 +44,26 @@ class AppState {
       identical(this, other) ||
       other is AppState &&
           runtimeType == other.runtimeType &&
-          isLoading == other.isLoading &&
+          isInitialLoading == other.isInitialLoading &&
+          isFavouritesLoading == other.isFavouritesLoading &&
           popularProducts == other.popularProducts &&
+          favouriteProducts == other.favouriteProducts &&
           categories == other.categories &&
           activeTab == other.activeTab;
 
   @override
   int get hashCode =>
-      isLoading.hashCode ^
+      isInitialLoading.hashCode ^
+      isFavouritesLoading.hashCode ^
       popularProducts.hashCode ^
+      favouriteProducts.hashCode ^
       categories.hashCode ^
       activeTab.hashCode;
 
   @override
   String toString() {
-    return 'AppState{isLoading: $isLoading, popularProducts: $popularProducts,'
+    return 'AppState{isInitialLoading: $isInitialLoading, popularProducts: $popularProducts,'
+        ' favouriteProducts: $favouriteProducts, isFavouritesLoading: $isFavouritesLoading'
         ' categories: $categories, activeTab: $activeTab}';
   }
 }

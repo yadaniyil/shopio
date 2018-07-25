@@ -32,6 +32,6 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-        isLoading: store.state.isLoading, categories: store.state.categories);
+        isLoading: store.state.isInitialLoading, categories: store.state.categories);
   }
 }

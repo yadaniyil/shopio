@@ -3,18 +3,18 @@ import 'package:shop/actions/actions.dart';
 import 'package:shop/models/category_model.dart';
 
 final categoriesReducer = combineReducers<List<CategoryModel>>([
-  TypedReducer<List<CategoryModel>, CategoriesLoadedAction>(
+  TypedReducer<List<CategoryModel>, InitialLoadedAction>(
       _setLoadedCategories),
-  TypedReducer<List<CategoryModel>, CategoriesNotLoadedAction>(
+  TypedReducer<List<CategoryModel>, InitialNotLoadedAction>(
       _setNotLoadedCategories),
 ]);
 
 List<CategoryModel> _setLoadedCategories(
-    List<CategoryModel> categories, CategoriesLoadedAction action) {
+    List<CategoryModel> categories, InitialLoadedAction action) {
   return action.categories;
 }
 
 List<CategoryModel> _setNotLoadedCategories(
-    List<CategoryModel> categories, CategoriesNotLoadedAction action) {
+    List<CategoryModel> categories, InitialNotLoadedAction action) {
   return [];
 }

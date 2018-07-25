@@ -4,9 +4,9 @@ import 'package:shop/actions/actions.dart';
 import 'package:shop/models/product_model.dart';
 
 final popularProductsReducer = combineReducers<List<ProductModel>>([
-  TypedReducer<List<ProductModel>, PopularProductsLoadedAction>(
+  TypedReducer<List<ProductModel>, InitialLoadedAction>(
       _setLoadedPopularProducts),
-  TypedReducer<List<ProductModel>, PopularProductsNotLoadedAction>(
+  TypedReducer<List<ProductModel>, InitialNotLoadedAction>(
       _setNoPopularProducts),
   TypedReducer<List<ProductModel>, PopularProductsRefreshedAction>(
       _setRefreshedPopularProducts),
@@ -15,12 +15,12 @@ final popularProductsReducer = combineReducers<List<ProductModel>>([
 ]);
 
 List<ProductModel> _setLoadedPopularProducts(
-    List<ProductModel> popularProducts, PopularProductsLoadedAction action) {
+    List<ProductModel> popularProducts, InitialLoadedAction action) {
   return action.popularProducts;
 }
 
 List<ProductModel> _setNoPopularProducts(
-    List<ProductModel> popularProducts, PopularProductsNotLoadedAction action) {
+    List<ProductModel> popularProducts, InitialNotLoadedAction action) {
   return [];
 }
 

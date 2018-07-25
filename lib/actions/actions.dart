@@ -4,22 +4,25 @@ import 'package:shop/models/app_tab.dart';
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/product_model.dart';
 
+// region Initial Load
 class InitialLoadAction {}
 
-// region Load Popular Product
-class PopularProductsNotLoadedAction {}
-
-class PopularProductsLoadedAction {
+// Initial loading will download popular products and categories
+class InitialLoadedAction {
   final List<ProductModel> popularProducts;
+  final List<CategoryModel> categories;
 
-  PopularProductsLoadedAction(this.popularProducts);
+  InitialLoadedAction(this.popularProducts, this.categories);
 
   @override
   String toString() {
-    return 'PopularProductsLoadedAction{popularProducts: $popularProducts}';
+    return 'PopularProductsLoadedAction{popularProducts: $popularProducts, '
+        'categories: $categories}';
   }
 }
-// endregion Load Popular Product
+
+class InitialNotLoadedAction {}
+// endregion Initial Load
 
 // region Refresh Popular Product
 class RefreshPopularProductsAction {
@@ -56,19 +59,41 @@ class UpdateTabAction {
 }
 // endregion Bottom Bar Tabs
 
-// region Categories
-class LoadCategoriesAction {}
+// region Favourites
+class AddToFavouritesAction {
+  final String productId;
 
-class CategoriesLoadedAction {
-  final List<CategoryModel> categories;
-
-  CategoriesLoadedAction(this.categories);
+  AddToFavouritesAction(this.productId);
 
   @override
   String toString() {
-    return 'CategoriesLoadedAction{categories: $categories}';
+    return 'AddToFavouritesAction{productId: $productId}';
   }
 }
 
-class CategoriesNotLoadedAction {}
-// endregion Categories
+class RemoveFromFavouritesAction {
+  final String productId;
+
+  RemoveFromFavouritesAction(this.productId);
+
+  @override
+  String toString() {
+    return 'RemoveFromFavouritesAction{productId: $productId}';
+  }
+}
+
+class LoadFavouritesAction {}
+
+class FavouritesLoadedAction {
+  final List<ProductModel> favourites;
+
+  FavouritesLoadedAction(this.favourites);
+
+  @override
+  String toString() {
+    return 'FavouritesLoadedAction{favourites: $favourites}';
+  }
+}
+
+class FavouritesNotLoadedAction {}
+// endregion Favourites

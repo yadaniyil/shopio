@@ -23,7 +23,7 @@ void main() {
 class ShopApp extends StatelessWidget {
   final store = Store<AppState>(
     appReducer,
-    initialState: AppState.loading(),
+    initialState: AppState.initialLoading(),
     middleware: createProductsMiddleware(),
   );
 

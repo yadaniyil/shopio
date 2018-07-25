@@ -39,7 +39,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-        loading: store.state.isLoading,
+        loading: store.state.isInitialLoading,
         popularProducts: store.state.popularProducts,
         onPopularProductsRefresh: () {
           var action = RefreshPopularProductsAction();
