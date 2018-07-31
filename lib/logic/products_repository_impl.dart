@@ -41,11 +41,11 @@ class ProductsRepositoryImpl extends ProductsRepository {
     List<String> favouritesIds = preferences.getStringList(FAVOURITES_IDS);
     List<ProductModel> favouriteProducts = List();
 
-    favouritesIds.map((id) {
-      downloadProductWithId(id).then((product) {
-        favouriteProducts.add(product);
-      });
-    });
+    for (String id in favouritesIds) {
+      var product = await downloadProductWithId(id);
+      favouriteProducts.add(product);
+    }
+
     return favouriteProducts;
   }
 
@@ -53,6 +53,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future<ProductModel> downloadProductWithId(String id) async {
     String dataURL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=$id';
     http.Response response = await http.get(dataURL);
+    print('response: ${response.body}');
     List productJson = json.decode(response.body)['meals'];
     ProductModel product = ProductModel.fromJson(productJson[0]);
     return product;
@@ -65,7 +66,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
     if (ids == null) {
       ids = List<String>();
     }
-    
+
     if (!ids.contains(productId)) {
       ids.add(productId);
     }

@@ -92,7 +92,6 @@ Middleware<AppState> _createLoadFavouriteProducts(
     ).catchError((_) {
       store.dispatch(FavouritesNotLoadedAction());
     });
-
     next(action);
   };
 }
