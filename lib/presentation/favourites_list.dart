@@ -41,8 +41,71 @@ class FavouritesList extends StatelessWidget {
   }
 
   Widget get _favouriteItems {
-    return ListView(
-      children: <Widget>[Text('Items')],
+    return ListView.builder(
+        itemCount: favouriteProducts.length,
+        itemBuilder: (context, index) {
+          return getRow(context, index);
+        });
+  }
+
+  Widget getRow(BuildContext context, int index) {
+    var item = favouriteProducts[index];
+    return Card(
+        child: Row(
+//      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+            flex: 6,
+            child: Image.network(
+              '${item.imageLink}',
+              width: 130.0,
+              fit: BoxFit.fitHeight,
+            )),
+        Expanded(
+            flex: 11,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(item.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18.0)),
+                  tagsSection(item),
+                  priceAndBuySection(item)
+                ],
+              ),
+            ))
+      ],
+    ));
+  }
+
+  Widget tagsSection(ProductModel product) {
+    List<String> tags = List();
+    if (product.category != null) tags.add(product.category);
+    if (product.area != null) tags.add(product.area);
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: tags
+              .map((title) => ActionChip(label: Text(title), onPressed: () {}))
+              .toList()),
+    );
+  }
+
+  Widget priceAndBuySection(ProductModel product) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        Text(product.getPrice(),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+        IconButton(
+            icon: Icon(Icons.add_shopping_cart, color: Colors.blueAccent),
+        onPressed: () => {})
+      ],
     );
   }
 }
