@@ -10,14 +10,11 @@ final favouriteProductsReducer = combineReducers<List<ProductModel>>([
 ]);
 
 List<ProductModel> _setLoadedFavouriteProducts(
-    List<ProductModel> favouriteProducts,
-    FavouritesLoadedAction action) {
+    List<ProductModel> favouriteProducts, FavouritesLoadedAction action) {
   return action.favourites;
 }
 
-List<ProductModel> _setNoFavouriteProducts(List<ProductModel> favouriteProducts,
-    FavouritesNotLoadedAction action) {
+List<ProductModel> _setNoFavouriteProducts(
+    List<ProductModel> favouriteProducts, FavouritesNotLoadedAction action) {
   return [];
 }
-
-

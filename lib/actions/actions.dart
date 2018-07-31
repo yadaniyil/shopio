@@ -60,10 +60,10 @@ class UpdateTabAction {
 // endregion Bottom Bar Tabs
 
 // region Favourites
-class AddToFavouritesAction {
+class SaveToFavouritesAction {
   final String productId;
 
-  AddToFavouritesAction(this.productId);
+  SaveToFavouritesAction(this.productId);
 
   @override
   String toString() {

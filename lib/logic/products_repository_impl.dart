@@ -10,6 +10,8 @@ import 'package:shop/models/product_model.dart';
 class ProductsRepositoryImpl extends ProductsRepository {
   const ProductsRepositoryImpl();
 
+  static const String FAVOURITES_IDS = 'favouritesIds';
+
   @override
   Future<List<ProductModel>> loadPopularProducts() async {
     String latestProductsUrl =
@@ -36,7 +38,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
   @override
   Future<List<ProductModel>> loadFavouriteProducts() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String> favouritesIds = preferences.getStringList('favouritesIds');
+    List<String> favouritesIds = preferences.getStringList(FAVOURITES_IDS);
 
     List<ProductModel> favouriteProducts = List();
 
@@ -55,5 +57,25 @@ class ProductsRepositoryImpl extends ProductsRepository {
     List productJson = json.decode(response.body)['meals'];
     ProductModel product = ProductModel.fromJson(productJson[0]);
     return product;
+  }
+
+  @override
+  Future<bool> saveToFavourites(String productId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var ids = preferences.getStringList(FAVOURITES_IDS);
+    if (!ids.contains(productId)) {
+      ids.add(productId);
+    }
+    return preferences.setStringList(FAVOURITES_IDS, ids);
+  }
+
+  @override
+  Future<bool> removeFromFavorites(String productId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var ids = preferences.getStringList(FAVOURITES_IDS);
+    if (ids.contains(productId)) {
+      ids.remove(productId);
+    }
+    return preferences.setStringList(FAVOURITES_IDS, ids);
   }
 }

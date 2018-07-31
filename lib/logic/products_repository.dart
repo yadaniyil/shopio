@@ -14,4 +14,8 @@ abstract class ProductsRepository {
   Future<List<ProductModel>> loadFavouriteProducts();
 
   Future<ProductModel> downloadProductWithId(String id);
+
+  Future<bool> saveToFavourites(String productId);
+
+  Future<bool> removeFromFavorites(String productId);
 }

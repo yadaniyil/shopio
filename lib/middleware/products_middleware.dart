@@ -15,6 +15,8 @@ List<Middleware<AppState>> createProductsMiddleware([
   final initialLoad = _createLoadPopularProductsAndCategories(repository);
   final refreshPopularProducts = _createRefreshPopularProducts(repository);
   final loadFavouriteProducts = _createLoadFavouriteProducts(repository);
+  final saveFavouriteProduct = _createSaveFavouriteProduct(repository);
+  final removeFavouriteProducts = _createRemoveFavouriteProduct(repository);
 
   return [
     LoggingMiddleware.printer(),
@@ -22,6 +24,9 @@ List<Middleware<AppState>> createProductsMiddleware([
     TypedMiddleware<AppState, RefreshPopularProductsAction>(
         refreshPopularProducts),
     TypedMiddleware<AppState, LoadFavouritesAction>(loadFavouriteProducts),
+    TypedMiddleware<AppState, SaveToFavouritesAction>(saveFavouriteProduct),
+    TypedMiddleware<AppState, RemoveFromFavouritesAction>(
+        removeFavouriteProducts),
   ];
 }
 
@@ -75,16 +80,35 @@ Middleware<AppState> _createRefreshPopularProducts(
 Middleware<AppState> _createLoadFavouriteProducts(
     ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    if (action is RefreshPopularProductsAction) {
-      repository.loadFavouriteProducts().then(
-        (favourites) {
-          store.dispatch(
-            FavouritesLoadedAction(favourites),
-          );
-        },
-      ).catchError((_) {
-        store.dispatch(FavouritesNotLoadedAction());
-      });
+    repository.loadFavouriteProducts().then(
+      (favourites) {
+        store.dispatch(
+          FavouritesLoadedAction(favourites),
+        );
+      },
+    ).catchError((_) {
+      store.dispatch(FavouritesNotLoadedAction());
+    });
+
+    next(action);
+  };
+}
+
+Middleware<AppState> _createSaveFavouriteProduct(
+    ProductsRepository repository) {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    if (action is SaveToFavouritesAction) {
+      repository.saveToFavourites(action.productId);
+    }
+    next(action);
+  };
+}
+
+Middleware<AppState> _createRemoveFavouriteProduct(
+    ProductsRepository repository) {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    if (action is SaveToFavouritesAction) {
+      repository.removeFromFavorites(action.productId);
     }
     next(action);
   };
