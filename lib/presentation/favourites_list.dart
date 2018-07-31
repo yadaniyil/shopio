@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop/containers/product_details.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/loading_indicator.dart';
 
@@ -51,29 +52,37 @@ class FavouritesList extends StatelessWidget {
   Widget getRow(BuildContext context, int index) {
     var item = favouriteProducts[index];
     return Card(
-        child: Container(
-      height: 130.0,
-      child: Row(
-        children: <Widget>[
-          Image.network(
-            '${item.imageLink}',
-            fit: BoxFit.fitHeight,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, left: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(item.name,
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
-                tagsSection(item),
-                priceAndBuySection(item)
-              ],
+        child: InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => ProductDetails(
+                  product: item,
+                )));
+      },
+      child: Container(
+        height: 130.0,
+        child: Row(
+          children: <Widget>[
+            Image.network(
+              '${item.imageLink}',
+              fit: BoxFit.fitHeight,
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, left: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(item.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18.0)),
+                  tagsSection(item),
+                  priceAndBuySection(item)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }
@@ -84,12 +93,8 @@ class FavouritesList extends StatelessWidget {
     if (product.area != null) tags.add(product.area);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
-      child: Row(
-          verticalDirection: VerticalDirection.up,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: tags
-              .map((title) => ActionChip(label: Text(title), onPressed: () {}))
-              .toList()),
+      child:
+          Row(children: tags.map((title) => Chip(label: Text(title))).toList()),
     );
   }
 
