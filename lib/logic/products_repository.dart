@@ -18,4 +18,6 @@ abstract class ProductsRepository {
   Future<bool> saveToFavourites(String productId);
 
   Future<bool> removeFromFavorites(String productId);
+
+  Future<List<String>> loadFavouriteIds();
 }

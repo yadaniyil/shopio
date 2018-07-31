@@ -4,12 +4,23 @@ import 'package:shop/presentation/cart_and_search_toolbar.dart';
 
 class ProductScreen extends StatelessWidget {
   final ProductModel product;
+  final Function onAddToFavourites;
+  final Function onDeleteFromFavourites;
+  final List<String> favouriteIds;
 
-  const ProductScreen({Key key, this.product}) : super(key: key);
+  const ProductScreen(
+      {Key key,
+      @required this.product,
+      @required this.onAddToFavourites,
+      @required this.onDeleteFromFavourites,
+      @required this.favouriteIds})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
+    bool isFavourite = favouriteIds.contains(product.id);
 
     return Scaffold(
         appBar: cartAndSearchToolbar(
@@ -17,7 +28,7 @@ class ProductScreen extends StatelessWidget {
         body: ListView(
           children: [
             foodPicture,
-            titleSection(theme),
+            titleSection(theme, isFavourite),
             Divider(),
             tagsSection,
             Divider(),
@@ -39,7 +50,7 @@ class ProductScreen extends StatelessWidget {
     );
   }
 
-  Widget titleSection(theme) {
+  Widget titleSection(theme, isFavourite) {
     return Container(
       height: 60.0,
       padding: EdgeInsets.only(top: 10.0),
@@ -50,9 +61,10 @@ class ProductScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[name(theme), price(theme)]),
           IconButton(
-            icon: Icon(Icons.favorite_border, color: Colors.red, size: 32.0),
+            icon: Icon(isFavourite ? Icons.favorite : Icons.favorite_border,
+                color: Colors.red, size: 32.0),
             tooltip: 'Add to favourite',
-            onPressed: () {},
+            onPressed: isFavourite ? onDeleteFromFavourites : onAddToFavourites,
           ),
           IconButton(
             icon: Icon(Icons.share, size: 24.0),

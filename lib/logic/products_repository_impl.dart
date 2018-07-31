@@ -39,7 +39,6 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future<List<ProductModel>> loadFavouriteProducts() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     List<String> favouritesIds = preferences.getStringList(FAVOURITES_IDS);
-
     List<ProductModel> favouriteProducts = List();
 
     favouritesIds.map((id) {
@@ -63,6 +62,10 @@ class ProductsRepositoryImpl extends ProductsRepository {
   Future<bool> saveToFavourites(String productId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var ids = preferences.getStringList(FAVOURITES_IDS);
+    if (ids == null) {
+      ids = List<String>();
+    }
+    
     if (!ids.contains(productId)) {
       ids.add(productId);
     }
@@ -77,5 +80,12 @@ class ProductsRepositoryImpl extends ProductsRepository {
       ids.remove(productId);
     }
     return preferences.setStringList(FAVOURITES_IDS, ids);
+  }
+
+  @override
+  Future<List<String>> loadFavouriteIds() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var ids = preferences.getStringList(FAVOURITES_IDS);
+    return ids ?? List();
   }
 }

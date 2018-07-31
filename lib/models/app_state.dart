@@ -70,8 +70,8 @@ class AppState {
   @override
   String toString() {
     return 'AppState{isInitialLoading: $isInitialLoading, '
-        'popularProducts: $popularProducts, '
-        'categories: $categories, '
+        'popularProducts: ${popularProducts.length}, '
+        'categories: ${categories.length}, '
         'isFavouritesLoading: $isFavouritesLoading '
         'favouriteProducts: $favouriteProducts, '
         'favouriteProductsIds: $favouriteProductsIds, '

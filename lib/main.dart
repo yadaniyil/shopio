@@ -6,7 +6,7 @@ import 'package:shop/routes.dart';
 import 'screens/start/start_screen.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/cart/cart_screen.dart';
-import 'screens/product/product_screen.dart';
+import 'package:shop/presentation/product_screen.dart';
 import 'colors.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';

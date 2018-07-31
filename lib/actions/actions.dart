@@ -11,13 +11,16 @@ class InitialLoadAction {}
 class InitialLoadedAction {
   final List<ProductModel> popularProducts;
   final List<CategoryModel> categories;
+  final List<String> favouriteIds;
 
-  InitialLoadedAction(this.popularProducts, this.categories);
+  InitialLoadedAction(this.popularProducts, this.categories, this.favouriteIds);
 
   @override
   String toString() {
-    return 'PopularProductsLoadedAction{popularProducts: $popularProducts, '
-        'categories: $categories}';
+    return 'InitialLoadedAction {'
+        'popularProducts: ${popularProducts.length}, '
+        'categories: ${categories.length}, '
+        'favouriteIds: ${favouriteIds.length}, ';
   }
 }
 

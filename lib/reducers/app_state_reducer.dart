@@ -5,6 +5,7 @@ import 'initial_loading_reducer.dart';
 import 'tabs_reducer.dart';
 import 'favourite_products_reducer.dart';
 import 'favourites_loading_reducer.dart';
+import 'favourites_ids_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
@@ -15,6 +16,8 @@ AppState appReducer(AppState state, action) {
         favouritesLoadingReducer(state.isFavouritesLoading, action),
     favouriteProducts:
         favouriteProductsReducer(state.favouriteProducts, action),
+    favouriteProductsIds:
+        favouriteIdsReducer(state.favouriteProductsIds, action),
     activeTab: tabsReducer(state.activeTab, action),
   );
 }

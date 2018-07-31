@@ -12,7 +12,7 @@ import 'package:shop/models/product_model.dart';
 List<Middleware<AppState>> createProductsMiddleware([
   ProductsRepository repository = const ProductsRepositoryImpl(),
 ]) {
-  final initialLoad = _createLoadPopularProductsAndCategories(repository);
+  final initialLoad = _createInitialLoading(repository);
   final refreshPopularProducts = _createRefreshPopularProducts(repository);
   final loadFavouriteProducts = _createLoadFavouriteProducts(repository);
   final saveFavouriteProduct = _createSaveFavouriteProduct(repository);
@@ -30,11 +30,14 @@ List<Middleware<AppState>> createProductsMiddleware([
   ];
 }
 
-Middleware<AppState> _createLoadPopularProductsAndCategories(
-    ProductsRepository repository) {
+Middleware<AppState> _createInitialLoading(ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
     Future
-        .wait([repository.loadPopularProducts(), repository.loadCategories()])
+        .wait([
+          repository.loadPopularProducts(),
+          repository.loadCategories(),
+          repository.loadFavouriteIds()
+        ])
         .then((List responses) => triggerActions(responses, store))
         .catchError((e) => store.dispatch(InitialNotLoadedAction()));
 
@@ -45,16 +48,16 @@ Middleware<AppState> _createLoadPopularProductsAndCategories(
 triggerActions(List responses, Store<AppState> store) {
   List<ProductModel> popularProducts = List();
   List<CategoryModel> categories = List();
+  List<String> favouriteIds = List();
 
-  if (responses[0] is List<ProductModel>) {
-    popularProducts.addAll(responses[0]);
-    categories.addAll(responses[1]);
-  } else {
-    popularProducts.addAll(responses[1]);
-    categories.addAll(responses[0]);
-  }
+  if (responses[0] is List<ProductModel>) popularProducts.addAll(responses[0]);
 
-  store.dispatch(InitialLoadedAction(popularProducts, categories));
+  if (responses[1] is List<CategoryModel>) categories.addAll(responses[1]);
+
+  if (responses[2] is List<String>) favouriteIds.addAll(responses[2]);
+
+  store
+      .dispatch(InitialLoadedAction(popularProducts, categories, favouriteIds));
 }
 
 Middleware<AppState> _createRefreshPopularProducts(

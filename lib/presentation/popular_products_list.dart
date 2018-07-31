@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shop/app_keys.dart';
 import 'package:shop/containers/app_loading.dart';
+import 'package:shop/containers/product_details.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/loading_indicator.dart';
-import 'package:shop/screens/product/product_screen.dart';
+import 'package:shop/presentation/product_screen.dart';
 
 class PopularProductsList extends StatelessWidget {
   final List<ProductModel> popularProducts;
@@ -47,7 +48,7 @@ class PopularProductsList extends StatelessWidget {
               child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (_) => ProductScreen(
+                  builder: (_) => ProductDetails(
                         product: products[index],
                       )));
             },

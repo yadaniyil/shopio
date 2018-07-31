@@ -6,7 +6,7 @@ final favouriteProductsReducer = combineReducers<List<ProductModel>>([
   TypedReducer<List<ProductModel>, FavouritesLoadedAction>(
       _setLoadedFavouriteProducts),
   TypedReducer<List<ProductModel>, FavouritesNotLoadedAction>(
-      _setNoFavouriteProducts),
+      _setNoFavouriteProducts)
 ]);
 
 List<ProductModel> _setLoadedFavouriteProducts(
