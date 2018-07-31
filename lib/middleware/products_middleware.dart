@@ -109,7 +109,7 @@ Middleware<AppState> _createSaveFavouriteProduct(
 Middleware<AppState> _createRemoveFavouriteProduct(
     ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    if (action is SaveToFavouritesAction) {
+    if (action is RemoveFromFavouritesAction) {
       repository.removeFromFavorites(action.productId);
     }
     next(action);
