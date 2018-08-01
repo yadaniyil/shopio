@@ -6,6 +6,7 @@ import 'tabs_reducer.dart';
 import 'favourite_products_reducer.dart';
 import 'favourites_loading_reducer.dart';
 import 'favourites_ids_reducer.dart';
+import 'cart_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
@@ -18,6 +19,7 @@ AppState appReducer(AppState state, action) {
         favouriteProductsReducer(state.favouriteProducts, action),
     favouriteProductsIds:
         favouriteIdsReducer(state.favouriteProductsIds, action),
+    cartItems: cartReducer(state.cartItems, action),
     activeTab: tabsReducer(state.activeTab, action),
   );
 }

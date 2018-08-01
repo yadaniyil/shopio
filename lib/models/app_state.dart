@@ -13,6 +13,8 @@ class AppState {
   final List<ProductModel> favouriteProducts;
   final List<String> favouriteProductsIds;
 
+  final List<ProductModel> cartItems;
+
   final AppTab activeTab;
 
   AppState(
@@ -22,6 +24,7 @@ class AppState {
       this.isFavouritesLoading = false,
       this.favouriteProducts = const [],
       this.favouriteProductsIds = const [],
+      this.cartItems = const [],
       this.activeTab = AppTab.home});
 
   factory AppState.initialLoading() => AppState(isInitialLoading: true);
@@ -33,6 +36,7 @@ class AppState {
       bool isFavouritesLoading,
       List<ProductModel> favouriteProducts,
       List<String> favouriteProductsIds,
+      List<ProductModel> cartItems,
       AppTab activeTab}) {
     return AppState(
         isInitialLoading: isInitialLoading ?? this.isInitialLoading,
@@ -41,6 +45,7 @@ class AppState {
         isFavouritesLoading: isFavouritesLoading ?? this.isFavouritesLoading,
         favouriteProducts: favouriteProducts ?? this.favouriteProducts,
         favouriteProductsIds: favouriteProductsIds ?? this.favouriteProductsIds,
+        cartItems: cartItems ?? this.cartItems,
         activeTab: activeTab ?? this.activeTab);
   }
 
@@ -55,6 +60,7 @@ class AppState {
           isFavouritesLoading == other.isFavouritesLoading &&
           favouriteProducts == other.favouriteProducts &&
           favouriteProductsIds == other.favouriteProductsIds &&
+          cartItems == other.cartItems &&
           activeTab == other.activeTab;
 
   @override
@@ -65,6 +71,7 @@ class AppState {
       isFavouritesLoading.hashCode ^
       favouriteProducts.hashCode ^
       favouriteProductsIds.hashCode ^
+      cartItems.hashCode ^
       activeTab.hashCode;
 
   @override
@@ -75,6 +82,7 @@ class AppState {
         'isFavouritesLoading: $isFavouritesLoading '
         'favouriteProducts: $favouriteProducts, '
         'favouriteProductsIds: $favouriteProductsIds, '
+        'cartItems: ${cartItems.length}, '
         'activeTab: $activeTab}';
   }
 }

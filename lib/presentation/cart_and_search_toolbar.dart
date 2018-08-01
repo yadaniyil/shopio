@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'cart_button.dart';
 
 AppBar cartAndSearchToolbar(
     {String title, BuildContext context, bool implyLeading = false}) {
@@ -13,11 +14,11 @@ AppBar cartAndSearchToolbar(
             print('Search action pressed');
           },
         ),
-        IconButton(
-          icon: Icon(Icons.shopping_cart),
+        CartButton(
+          itemCount: 3,
           onPressed: () {
             Navigator.of(context).pushNamed('/cart');
           },
-        )
+        ),
       ]);
 }

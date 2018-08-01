@@ -100,3 +100,27 @@ class FavouritesLoadedAction {
 
 class FavouritesNotLoadedAction {}
 // endregion Favourites
+
+// region Cart
+class AddToCartAction {
+  final ProductModel product;
+
+  AddToCartAction(this.product);
+
+  @override
+  String toString() {
+    return 'AddToCartAction{product: $product}';
+  }
+}
+
+class RemoveFromCartAction {
+  final ProductModel product;
+
+  RemoveFromCartAction(this.product);
+
+  @override
+  String toString() {
+    return 'RemoveFromCartAction{product: $product}';
+  }
+}
+// endregion Cart
