@@ -6,14 +6,18 @@ class ProductScreen extends StatelessWidget {
   final ProductModel product;
   final Function onAddToFavourites;
   final Function onDeleteFromFavourites;
+  final Function onAddToCart;
   final List<String> favouriteIds;
+  final int cartProductsQuantity;
 
   const ProductScreen(
       {Key key,
       @required this.product,
       @required this.onAddToFavourites,
       @required this.onDeleteFromFavourites,
-      @required this.favouriteIds})
+      @required this.onAddToCart,
+      @required this.favouriteIds,
+      @required this.cartProductsQuantity})
       : super(key: key);
 
   @override
@@ -24,7 +28,10 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: cartAndSearchToolbar(
-            title: product.name, context: context, implyLeading: true),
+            title: product.name,
+            context: context,
+            implyLeading: true,
+            cartProductsQuantity: cartProductsQuantity),
         body: ListView(
           children: [
             foodPicture,
@@ -104,7 +111,7 @@ class ProductScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: RaisedButton(
-          onPressed: () {},
+          onPressed: onAddToCart,
           child: Text('ADD TO CART', style: TextStyle(fontSize: 14.0)),
           textColor: Colors.white,
           padding: EdgeInsets.all(20.0)),

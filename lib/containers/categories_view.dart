@@ -16,7 +16,10 @@ class CategoriesView extends StatelessWidget {
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
         return Scaffold(
-          appBar: cartAndSearchToolbar(title: 'Categories', context: context),
+          appBar: cartAndSearchToolbar(
+              title: 'Categories',
+              context: context,
+              cartProductsQuantity: vm.cartQuantity),
           body: CategoriesList(categories: vm.categories),
         );
       },
@@ -27,11 +30,17 @@ class CategoriesView extends StatelessWidget {
 class _ViewModel {
   final bool isLoading;
   final List<CategoryModel> categories;
+  final int cartQuantity;
 
-  _ViewModel({@required this.isLoading, @required this.categories});
+  _ViewModel(
+      {@required this.isLoading,
+      @required this.categories,
+      @required this.cartQuantity});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-        isLoading: store.state.isInitialLoading, categories: store.state.categories);
+        isLoading: store.state.isInitialLoading,
+        categories: store.state.categories,
+        cartQuantity: store.state.cartItems.length);
   }
 }

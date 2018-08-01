@@ -3,11 +3,11 @@ import 'package:shop/app_keys.dart';
 import 'package:shop/containers/active_tab.dart';
 import 'package:shop/containers/categories_view.dart';
 import 'package:shop/containers/favourites_view.dart';
+import 'package:shop/containers/profile_view.dart';
 import 'package:shop/containers/tab_selector.dart';
 import 'package:shop/models/app_tab.dart';
 
 import 'package:shop/containers/dashboard_view.dart';
-import 'profile_view.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen() : super(key: AppKeys.homeScreen);

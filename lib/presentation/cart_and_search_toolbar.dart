@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'cart_button.dart';
 
 AppBar cartAndSearchToolbar(
-    {String title, BuildContext context, bool implyLeading = false}) {
+    {String title,
+    BuildContext context,
+    bool implyLeading = false,
+    int cartProductsQuantity = 0}) {
   return AppBar(
       backgroundColor: Colors.white,
       automaticallyImplyLeading: implyLeading,
@@ -15,7 +18,7 @@ AppBar cartAndSearchToolbar(
           },
         ),
         CartButton(
-          itemCount: 3,
+          itemCount: cartProductsQuantity,
           onPressed: () {
             Navigator.of(context).pushNamed('/cart');
           },
