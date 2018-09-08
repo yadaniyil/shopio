@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'dart:math';
 
 part 'product_model.g.dart';
 
@@ -33,6 +34,8 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
 
   @JsonKey(name: 'dateModified')
   final String dateModified;
+
+  String price;
 
   // Ingredients. 20 is max. "" if no ingredient
   @JsonKey(name: 'strIngredient1')
@@ -175,6 +178,9 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
       this.measure20});
 
   String getPrice() {
-    return '\$12.00 ';
+    if (price == null) {
+      price = '\$${Random().nextInt(20).toString()}';
+    }
+    return price;
   }
 }

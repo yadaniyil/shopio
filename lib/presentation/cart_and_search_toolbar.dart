@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'cart_button.dart';
+import 'package:badges/badges.dart';
+
+
 
 AppBar cartAndSearchToolbar(
     {String title,
@@ -17,8 +19,9 @@ AppBar cartAndSearchToolbar(
             print('Search action pressed');
           },
         ),
-        CartButton(
+        BadgeIconButton(
           itemCount: cartProductsQuantity,
+          iconData: Icons.shopping_cart,
           onPressed: () {
             Navigator.of(context).pushNamed('/cart');
           },

@@ -12,6 +12,7 @@ dependencies:
   redux: ^3.0.0
   redux_logging: ^0.3.0
   shared_preferences: ^0.4.2
+  badges: ^0.0.4
 
 dev_dependencies:
   # flutter_test:   # <-- remove this for now.

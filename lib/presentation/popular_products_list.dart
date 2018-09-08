@@ -4,7 +4,6 @@ import 'package:shop/containers/app_loading.dart';
 import 'package:shop/containers/product_details.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/loading_indicator.dart';
-import 'package:shop/presentation/product_screen.dart';
 
 class PopularProductsList extends StatelessWidget {
   final List<ProductModel> popularProducts;
@@ -70,7 +69,7 @@ class PopularProductsList extends StatelessWidget {
                         maxLines: 1,
                       ),
                       SizedBox(height: 8.0),
-                      Text('\$12.00 ', style: theme.textTheme.body2),
+                      Text(products[index].getPrice(), style: theme.textTheme.body2),
                     ],
                   ),
                 ),
