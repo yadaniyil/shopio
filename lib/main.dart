@@ -16,7 +16,6 @@ import 'package:redux_logging/redux_logging.dart';
 
 void main() {
   // ignore: deprecated_member_use
-  MaterialPageRoute.debugEnableFadingRoutes = true;
   runApp(ShopApp());
 }
 

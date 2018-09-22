@@ -21,7 +21,7 @@ AppBar cartAndSearchToolbar(
         ),
         BadgeIconButton(
           itemCount: cartProductsQuantity,
-          iconData: Icons.shopping_cart,
+          icon: Icon(Icons.shopping_cart),
           onPressed: () {
             Navigator.of(context).pushNamed('/cart');
           },
