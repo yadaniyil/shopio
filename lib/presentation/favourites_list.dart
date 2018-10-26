@@ -31,17 +31,19 @@ class FavouritesList extends StatelessWidget {
   }
 
   Widget get _noFavouriteItems {
-    return ListView(
-      children: <Widget>[
-        SizedBox(height: 140.0),
-        Icon(Icons.favorite_border, size: 120.0, color: Colors.red),
-        SizedBox(height: 40.0),
-        Text(
-          'You do not have favourite items yet',
-          textAlign: TextAlign.center,
-          textScaleFactor: 1.2,
-        )
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.favorite_border, size: 120.0, color: Colors.red),
+          SizedBox(height: 40.0),
+          Text(
+            'You do not have favourite items yet',
+            textAlign: TextAlign.center,
+            textScaleFactor: 1.2,
+          )
+        ],
+      ),
     );
   }
 
@@ -100,10 +102,12 @@ class FavouritesList extends StatelessWidget {
     if (product.category != null) tags.add(product.category);
     if (product.area != null) tags.add(product.area);
     return Row(
-        children: tags.map((title) => Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: Chip(label: Text(title)),
-        )).toList());
+        children: tags
+            .map((title) => Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Chip(label: Text(title)),
+                ))
+            .toList());
   }
 
   Widget priceAndBuySection(ProductModel product) {
