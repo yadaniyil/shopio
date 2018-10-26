@@ -6,9 +6,13 @@ import 'package:shop/presentation/loading_indicator.dart';
 class FavouritesList extends StatelessWidget {
   final List<ProductModel> favouriteProducts;
   final bool isLoading;
+  final Function(ProductModel) addToCart;
 
   FavouritesList(
-      {Key key, @required this.favouriteProducts, @required this.isLoading})
+      {Key key,
+      @required this.favouriteProducts,
+      @required this.isLoading,
+      @required this.addToCart})
       : super(key: key);
 
   @override
@@ -60,25 +64,29 @@ class FavouritesList extends StatelessWidget {
                 )));
       },
       child: Container(
-        height: 140.0,
         child: Row(
           children: <Widget>[
-            Image.network(
-              '${item.imageLink}',
-              fit: BoxFit.fitHeight,
+            Expanded(
+              child: Image.network(
+                '${item.imageLink}',
+                fit: BoxFit.fill,
+              ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(item.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18.0)),
-                  tagsSection(item),
-                  priceAndBuySection(item)
-                ],
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0, left: 16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(item.name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18.0)),
+                    tagsSection(item),
+                    priceAndBuySection(item)
+                  ],
+                ),
               ),
             )
           ],
@@ -91,21 +99,22 @@ class FavouritesList extends StatelessWidget {
     List<String> tags = List();
     if (product.category != null) tags.add(product.category);
     if (product.area != null) tags.add(product.area);
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child:
-          Row(children: tags.map((title) => Chip(label: Text(title))).toList()),
-    );
+    return Row(
+        children: tags.map((title) => Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Chip(label: Text(title)),
+        )).toList());
   }
 
   Widget priceAndBuySection(ProductModel product) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Text(product.getPrice(),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
         IconButton(
             icon: Icon(Icons.add_shopping_cart, color: Colors.blueAccent),
-            onPressed: () => {})
+            onPressed: () => addToCart(product))
       ],
     );
   }

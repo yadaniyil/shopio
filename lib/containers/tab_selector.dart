@@ -21,7 +21,7 @@ class TabSelector extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           key: AppKeys.tabs,
           currentIndex: AppTab.values.indexOf(vm.activeTab),
-          onTap: vm.onTabSelected,
+          onTap: (position) => vm.onTabSelected(position),
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.home, key: AppKeys.homeTab),

@@ -22,7 +22,9 @@ class FavouritesView extends StatelessWidget {
               context: context,
               cartProductsQuantity: vm.cartQuantity),
           body: FavouritesList(
-              favouriteProducts: vm.favouriteProducts, isLoading: vm.isLoading),
+              favouriteProducts: vm.favouriteProducts,
+              isLoading: vm.isLoading,
+              addToCart: vm.addToCart),
         );
       },
     );
@@ -33,16 +35,19 @@ class _ViewModel {
   final bool isLoading;
   final List<ProductModel> favouriteProducts;
   final int cartQuantity;
+  final Function(ProductModel product) addToCart;
 
   _ViewModel(
       {@required this.isLoading,
       @required this.favouriteProducts,
+      @required this.addToCart,
       @required this.cartQuantity});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
         isLoading: store.state.isFavouritesLoading,
         favouriteProducts: store.state.favouriteProducts,
+        addToCart: (product) => store.dispatch(AddToCartAction(product)),
         cartQuantity: store.state.cartItems.length);
   }
 }
