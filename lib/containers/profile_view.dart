@@ -8,6 +8,7 @@ import 'package:shop/screens/home/profile_content.dart';
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('Profile view build');
     return StoreConnector(
       converter: _ViewModel.fromStore,
       builder: (context, _ViewModel vm) {

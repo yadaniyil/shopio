@@ -44,7 +44,10 @@ class PopularProductsList extends StatelessWidget {
     List<Card> cards = List.generate(
       products.length,
       (int index) => Card(
-              child: InkWell(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          child: InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => ProductDetails(
@@ -55,7 +58,7 @@ class PopularProductsList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 AspectRatio(
-                  aspectRatio: 18.0 / 11.0,
+                  aspectRatio: 16.0 / 11.0,
                   child: foodPicture(products, index),
                 ),
                 Padding(
@@ -69,7 +72,8 @@ class PopularProductsList extends StatelessWidget {
                         maxLines: 1,
                       ),
                       SizedBox(height: 8.0),
-                      Text(products[index].getPrice(), style: theme.textTheme.body2),
+                      Text(products[index].getPrice(),
+                          style: theme.textTheme.body2),
                     ],
                   ),
                 ),

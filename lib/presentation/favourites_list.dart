@@ -60,7 +60,7 @@ class FavouritesList extends StatelessWidget {
                 )));
       },
       child: Container(
-        height: 130.0,
+        height: 140.0,
         child: Row(
           children: <Widget>[
             Image.network(

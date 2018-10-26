@@ -15,7 +15,6 @@ import 'reducers/app_state_reducer.dart';
 import 'package:redux_logging/redux_logging.dart';
 
 void main() {
-  // ignore: deprecated_member_use
   runApp(ShopApp());
 }
 
