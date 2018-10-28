@@ -69,8 +69,9 @@ class FavouritesList extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Expanded(
+              flex: 1,
               child: Image.network(
-                '${item.imageLink}',
+                item.imageLink,
                 fit: BoxFit.fill,
               ),
             ),

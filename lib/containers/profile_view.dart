@@ -15,8 +15,7 @@ class ProfileView extends StatelessWidget {
         return Scaffold(
           appBar: cartAndSearchToolbar(
               title: 'Profile',
-              context: context,
-              cartProductsQuantity: vm.cartProductsQuantity),
+              context: context),
           body: ProfileContent()
         );
       },
@@ -25,6 +24,7 @@ class ProfileView extends StatelessWidget {
 }
 
 class _ViewModel {
+  // Remove in future
   final int cartProductsQuantity;
 
   _ViewModel({this.cartProductsQuantity});

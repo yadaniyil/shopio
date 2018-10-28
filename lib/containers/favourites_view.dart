@@ -17,10 +17,7 @@ class FavouritesView extends StatelessWidget {
       onInit: (store) => store.dispatch(LoadFavouritesAction()),
       builder: (context, vm) {
         return Scaffold(
-          appBar: cartAndSearchToolbar(
-              title: 'Favourites',
-              context: context,
-              cartProductsQuantity: vm.cartQuantity),
+          appBar: cartAndSearchToolbar(title: 'Favourites', context: context),
           body: FavouritesList(
               favouriteProducts: vm.favouriteProducts,
               isLoading: vm.isLoading,
@@ -34,20 +31,17 @@ class FavouritesView extends StatelessWidget {
 class _ViewModel {
   final bool isLoading;
   final List<ProductModel> favouriteProducts;
-  final int cartQuantity;
   final Function(ProductModel product) addToCart;
 
   _ViewModel(
       {@required this.isLoading,
       @required this.favouriteProducts,
-      @required this.addToCart,
-      @required this.cartQuantity});
+      @required this.addToCart});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
         isLoading: store.state.isFavouritesLoading,
         favouriteProducts: store.state.favouriteProducts,
-        addToCart: (product) => store.dispatch(AddToCartAction(product)),
-        cartQuantity: store.state.cartItems.length);
+        addToCart: (product) => store.dispatch(AddToCartAction(product)));
   }
 }

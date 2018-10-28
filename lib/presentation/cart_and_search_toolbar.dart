@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
-
-
+import 'package:shop/containers/cart_quantity.dart';
 
 AppBar cartAndSearchToolbar(
     {String title,
     BuildContext context,
-    bool implyLeading = false,
-    int cartProductsQuantity = 0}) {
+    bool implyLeading = false}) {
   return AppBar(
       backgroundColor: Colors.white,
       automaticallyImplyLeading: implyLeading,
@@ -19,11 +17,15 @@ AppBar cartAndSearchToolbar(
             print('Search action pressed');
           },
         ),
-        BadgeIconButton(
-          itemCount: cartProductsQuantity,
-          icon: Icon(Icons.shopping_cart),
-          onPressed: () {
-            Navigator.of(context).pushNamed('/cart');
+        CartQuantity(
+          builder: (BuildContext context, int cartQuantity) {
+            return BadgeIconButton(
+              itemCount: cartQuantity,
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed('/cart');
+              },
+            );
           },
         ),
       ]);

@@ -8,7 +8,6 @@ class ProductScreen extends StatelessWidget {
   final Function onDeleteFromFavourites;
   final Function onAddToCart;
   final List<String> favouriteIds;
-  final int cartProductsQuantity;
 
   const ProductScreen(
       {Key key,
@@ -16,8 +15,7 @@ class ProductScreen extends StatelessWidget {
       @required this.onAddToFavourites,
       @required this.onDeleteFromFavourites,
       @required this.onAddToCart,
-      @required this.favouriteIds,
-      @required this.cartProductsQuantity})
+      @required this.favouriteIds})
       : super(key: key);
 
   @override
@@ -30,8 +28,7 @@ class ProductScreen extends StatelessWidget {
         appBar: cartAndSearchToolbar(
             title: product.name,
             context: context,
-            implyLeading: true,
-            cartProductsQuantity: cartProductsQuantity),
+            implyLeading: true),
         body: ListView(
           children: [
             foodPicture,

@@ -123,4 +123,16 @@ class RemoveFromCartAction {
     return 'RemoveFromCartAction{product: $product}';
   }
 }
+
+class DecrementCartProductAction {
+  final ProductModel product;
+
+  DecrementCartProductAction(this.product);
+
+  @override
+  String toString() {
+    return 'DecrementCartProductAction{product: $product}';
+  }
+}
+
 // endregion Cart

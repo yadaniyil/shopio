@@ -1,5 +1,6 @@
 import 'package:meta/meta.dart';
 import 'package:shop/models/app_tab.dart';
+import 'package:shop/models/cart_model.dart';
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/product_model.dart';
 
@@ -13,7 +14,7 @@ class AppState {
   final List<ProductModel> favouriteProducts;
   final List<String> favouriteProductsIds;
 
-  final List<ProductModel> cartItems;
+  final List<CartModel> cartItems;
 
   final AppTab activeTab;
 
@@ -36,7 +37,7 @@ class AppState {
       bool isFavouritesLoading,
       List<ProductModel> favouriteProducts,
       List<String> favouriteProductsIds,
-      List<ProductModel> cartItems,
+      List<CartModel> cartItems,
       AppTab activeTab}) {
     return AppState(
         isInitialLoading: isInitialLoading ?? this.isInitialLoading,

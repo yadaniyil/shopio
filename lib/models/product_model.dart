@@ -183,4 +183,8 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
     }
     return price;
   }
+
+  double getPriceDouble() {
+    return double.tryParse(getPrice().substring(1)) ?? (0.0);
+  }
 }

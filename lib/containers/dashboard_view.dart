@@ -17,10 +17,7 @@ class DashboardView extends StatelessWidget {
       converter: _ViewModel.fromStore,
       builder: (context, vm) {
         return Scaffold(
-          appBar: cartAndSearchToolbar(
-              title: 'Popular now',
-              context: context,
-              cartProductsQuantity: vm.cartQuantity),
+          appBar: cartAndSearchToolbar(title: 'Popular now', context: context),
           body: PopularProductsList(
               popularProducts: vm.popularProducts,
               onPopularProductsRefresh: vm.onPopularProductsRefresh),
@@ -34,13 +31,11 @@ class _ViewModel {
   final bool loading;
   final List<ProductModel> popularProducts;
   final Function onPopularProductsRefresh;
-  final int cartQuantity;
 
   _ViewModel(
       {@required this.loading,
       @required this.popularProducts,
-      @required this.onPopularProductsRefresh,
-      @required this.cartQuantity});
+      @required this.onPopularProductsRefresh});
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
@@ -50,7 +45,6 @@ class _ViewModel {
           var action = RefreshPopularProductsAction();
           store.dispatch(action);
           return action.completer.future;
-        },
-        cartQuantity: store.state.cartItems.length);
+        });
   }
 }

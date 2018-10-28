@@ -11,7 +11,11 @@ class CartQuantity extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, int>(
       distinct: true,
-      converter: (store) => store.state.cartItems.length,
+      converter: (store) {
+        int totalQuantity = 0;
+        store.state.cartItems.forEach((item) => totalQuantity += item.quantity);
+        return totalQuantity;
+      },
       builder: builder,
     );
   }

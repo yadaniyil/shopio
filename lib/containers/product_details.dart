@@ -24,7 +24,6 @@ class ProductDetails extends StatelessWidget {
           onDeleteFromFavourites: vm.onDeleteFromFavourites,
           favouriteIds: vm.favouriteIds,
           onAddToCart: vm.onAddToCart,
-          cartProductsQuantity: vm.cartProductsQuantity,
         );
       },
     );
@@ -37,15 +36,13 @@ class _ViewModel {
   final Function onDeleteFromFavourites;
   final Function onAddToCart;
   final List<String> favouriteIds;
-  final int cartProductsQuantity;
 
   _ViewModel(
       {this.favouriteIds,
       this.product,
       this.onAddToFavourites,
       this.onDeleteFromFavourites,
-      this.onAddToCart,
-      this.cartProductsQuantity});
+      this.onAddToCart});
 
   static _ViewModel from(Store<AppState> store, ProductModel product) {
     return _ViewModel(
@@ -56,7 +53,6 @@ class _ViewModel {
         onDeleteFromFavourites: () =>
             store.dispatch(RemoveFromFavouritesAction(product.id)),
         favouriteIds: store.state.favouriteProductsIds,
-        onAddToCart: () => store.dispatch(AddToCartAction(product)),
-        cartProductsQuantity: store.state.cartItems.length);
+        onAddToCart: () => store.dispatch(AddToCartAction(product)));
   }
 }
