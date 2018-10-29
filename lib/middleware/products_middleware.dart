@@ -32,12 +32,12 @@ List<Middleware<AppState>> createProductsMiddleware([
 
 Middleware<AppState> _createInitialLoading(ProductsRepository repository) {
   return (Store<AppState> store, action, NextDispatcher next) {
-    Future
-        .wait([
-          repository.loadPopularProducts(),
-          repository.loadCategories(),
-          repository.loadFavouriteIds()
-        ])
+    Future.wait([
+      repository.loadPopularProducts(),
+      repository.loadCategories(),
+      repository.loadAreas(),
+      repository.loadFavouriteIds()
+    ])
         .then((List responses) => triggerActions(responses, store))
         .catchError((e) => store.dispatch(InitialNotLoadedAction()));
 
@@ -48,16 +48,19 @@ Middleware<AppState> _createInitialLoading(ProductsRepository repository) {
 triggerActions(List responses, Store<AppState> store) {
   List<ProductModel> popularProducts = List();
   List<CategoryModel> categories = List();
+  List<String> mealAreas = List();
   List<String> favouriteIds = List();
 
   if (responses[0] is List<ProductModel>) popularProducts.addAll(responses[0]);
 
   if (responses[1] is List<CategoryModel>) categories.addAll(responses[1]);
 
-  if (responses[2] is List<String>) favouriteIds.addAll(responses[2]);
+  if (responses[2] is List<String>) mealAreas.addAll(responses[2]);
 
-  store
-      .dispatch(InitialLoadedAction(popularProducts, categories, favouriteIds));
+  if (responses[3] is List<String>) favouriteIds.addAll(responses[3]);
+
+  store.dispatch(InitialLoadedAction(
+      popularProducts, categories, mealAreas, favouriteIds));
 }
 
 Middleware<AppState> _createRefreshPopularProducts(

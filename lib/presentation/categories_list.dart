@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop/containers/app_loading.dart';
 import 'package:shop/models/category_model.dart';
+import 'package:shop/presentation/loading_indicator.dart';
 
 class CategoriesList extends StatelessWidget {
   final List<CategoryModel> categories;
@@ -8,7 +10,9 @@ class CategoriesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getCategoriesListView();
+    return AppLoading(builder: (context, isLoading) {
+      return isLoading ? LoadingIndicator() : getCategoriesListView();
+    });
   }
 
   ListView getCategoriesListView() => ListView.builder(
@@ -21,7 +25,7 @@ class CategoriesList extends StatelessWidget {
   Widget getRow(int i, BuildContext context, List categories) {
     return Column(children: <Widget>[
       ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
           onTap: () {
             Navigator.of(context).pushNamed('/home');
           },
@@ -30,7 +34,9 @@ class CategoriesList extends StatelessWidget {
             width: 80.0,
           ),
           title: Text("${categories[i].name}")),
-      Divider()
+      Divider(
+        height: 1.0,
+      )
     ]);
   }
 }

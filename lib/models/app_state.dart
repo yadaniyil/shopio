@@ -9,19 +9,18 @@ class AppState {
   final bool isInitialLoading;
   final List<ProductModel> popularProducts;
   final List<CategoryModel> categories;
-
+  final List<String> areas;
   final bool isFavouritesLoading;
   final List<ProductModel> favouriteProducts;
   final List<String> favouriteProductsIds;
-
   final List<CartModel> cartItems;
-
   final AppTab activeTab;
 
   AppState(
       {this.isInitialLoading = false,
       this.popularProducts = const [],
       this.categories = const [],
+      this.areas = const [],
       this.isFavouritesLoading = false,
       this.favouriteProducts = const [],
       this.favouriteProductsIds = const [],
@@ -34,6 +33,7 @@ class AppState {
       {bool isInitialLoading,
       List<ProductModel> popularProducts,
       List<CategoryModel> categories,
+      List<String> areas,
       bool isFavouritesLoading,
       List<ProductModel> favouriteProducts,
       List<String> favouriteProductsIds,
@@ -43,6 +43,7 @@ class AppState {
         isInitialLoading: isInitialLoading ?? this.isInitialLoading,
         popularProducts: popularProducts ?? this.popularProducts,
         categories: categories ?? this.categories,
+        areas: areas ?? this.areas,
         isFavouritesLoading: isFavouritesLoading ?? this.isFavouritesLoading,
         favouriteProducts: favouriteProducts ?? this.favouriteProducts,
         favouriteProductsIds: favouriteProductsIds ?? this.favouriteProductsIds,
@@ -58,6 +59,7 @@ class AppState {
           isInitialLoading == other.isInitialLoading &&
           popularProducts == other.popularProducts &&
           categories == other.categories &&
+          areas == other.areas &&
           isFavouritesLoading == other.isFavouritesLoading &&
           favouriteProducts == other.favouriteProducts &&
           favouriteProductsIds == other.favouriteProductsIds &&
@@ -68,6 +70,7 @@ class AppState {
   int get hashCode =>
       isInitialLoading.hashCode ^
       categories.hashCode ^
+      areas.hashCode ^
       popularProducts.hashCode ^
       isFavouritesLoading.hashCode ^
       favouriteProducts.hashCode ^
@@ -80,6 +83,7 @@ class AppState {
     return 'AppState{isInitialLoading: $isInitialLoading, '
         'popularProducts: ${popularProducts.length}, '
         'categories: ${categories.length}, '
+        'areas: ${areas.length}, '
         'isFavouritesLoading: $isFavouritesLoading '
         'favouriteProducts: $favouriteProducts, '
         'favouriteProductsIds: $favouriteProductsIds, '

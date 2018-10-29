@@ -11,6 +11,8 @@ abstract class ProductsRepository {
 
   Future<List<CategoryModel>> loadCategories();
 
+  Future<List<String>> loadAreas();
+
   Future<List<ProductModel>> loadFavouriteProducts();
 
   Future<ProductModel> downloadProductWithId(String id);

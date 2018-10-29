@@ -36,6 +36,17 @@ class ProductsRepositoryImpl extends ProductsRepository {
   }
 
   @override
+  Future<List<String>> loadAreas() async {
+    String dataURL = "https://www.themealdb.com/api/json/v1/1/list.php?a=list";
+    http.Response response = await http.get(dataURL);
+    List areasJson = json.decode(response.body)['meals'];
+    List<String> areas = List();
+    areasJson
+        .forEach((json) => areas.add(json['strArea']));
+    return areas;
+  }
+
+  @override
   Future<List<ProductModel>> loadFavouriteProducts() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     List<String> favouritesIds = preferences.getStringList(FAVOURITES_IDS);

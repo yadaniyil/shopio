@@ -7,12 +7,14 @@ import 'favourite_products_reducer.dart';
 import 'favourites_loading_reducer.dart';
 import 'favourites_ids_reducer.dart';
 import 'cart_reducer.dart';
+import 'areas_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
     isInitialLoading: initialLoadingReducer(state.isInitialLoading, action),
     popularProducts: popularProductsReducer(state.popularProducts, action),
     categories: categoriesReducer(state.categories, action),
+    areas: areasReducer(state.areas, action),
     isFavouritesLoading:
         favouritesLoadingReducer(state.isFavouritesLoading, action),
     favouriteProducts:

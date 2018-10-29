@@ -5,8 +5,10 @@ import 'package:shop/containers/cart_quantity.dart';
 AppBar cartAndSearchToolbar(
     {String title,
     BuildContext context,
-    bool implyLeading = false}) {
+    bool implyLeading = false,
+    List<Widget> tabs = null}) {
   return AppBar(
+      bottom: tabs != null ? TabBar(tabs: tabs) : null,
       backgroundColor: Colors.white,
       automaticallyImplyLeading: implyLeading,
       title: Text(title),
