@@ -29,11 +29,14 @@ class PopularProductsList extends StatelessWidget {
       onRefresh: () {
         return onPopularProductsRefresh();
       },
-      child: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(context, popularProducts),
+      child: Container(
+        color: Colors.grey[100],
+        child: GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(16.0),
+          childAspectRatio: 8.0 / 9.0,
+          children: _buildGridCards(context, popularProducts),
+        ),
       ),
     );
   }

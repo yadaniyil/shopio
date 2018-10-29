@@ -15,4 +15,8 @@ class CartModel {
   String getTotalPrice() {
     return '\$${_quantity * _product.getPriceDouble()}';
   }
+
+  double getTotalPriceDouble() {
+    return _quantity * _product.getPriceDouble();
+  }
 }

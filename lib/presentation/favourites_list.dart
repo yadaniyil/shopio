@@ -48,11 +48,14 @@ class FavouritesList extends StatelessWidget {
   }
 
   Widget get _favouriteItems {
-    return ListView.builder(
-        itemCount: favouriteProducts.length,
-        itemBuilder: (context, index) {
-          return getRow(context, index);
-        });
+    return Container(
+      color: Colors.grey[100],
+      child: ListView.builder(
+          itemCount: favouriteProducts.length,
+          itemBuilder: (context, index) {
+            return getRow(context, index);
+          }),
+    );
   }
 
   Widget getRow(BuildContext context, int index) {

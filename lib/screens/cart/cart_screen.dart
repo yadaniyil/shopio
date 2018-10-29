@@ -45,11 +45,58 @@ class CartScreen extends StatelessWidget {
   }
 
   Widget get _cartItems {
-    return ListView.builder(
-        itemCount: cartProducts.length,
-        itemBuilder: (context, index) {
-          return getRow(context, index);
-        });
+    return Container(
+      color: Colors.grey[100],
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 11,
+            child: ListView.builder(
+                itemCount: cartProducts.length,
+                itemBuilder: (context, index) {
+                  return getRow(context, index);
+                }),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 10.0,
+                  )
+                ],
+              ),
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 2.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text('Total:',
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold)),
+                      Text(_calculateTotalPrice(),
+                          style: TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  SizedBox(height: 4.0),
+                  RaisedButton(
+                    onPressed: () {},
+                    child: Text('Proceed to checkout'),
+                    textColor: Colors.white,
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Widget getRow(BuildContext context, int index) {
@@ -142,5 +189,11 @@ class CartScreen extends StatelessWidget {
             padding: EdgeInsets.zero)
       ],
     );
+  }
+
+  _calculateTotalPrice() {
+    double price = 0.0;
+    cartProducts.forEach((item) => price += item.getTotalPriceDouble());
+    return '\$$price';
   }
 }
