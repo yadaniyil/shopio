@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:shop/containers/app_loading.dart';
+import 'package:shop/containers/products_view.dart';
+import 'package:shop/models/products_filter.dart';
 import 'package:shop/presentation/loading_indicator.dart';
 
 class AreasList extends StatelessWidget {
+  final bool isLoading;
   final List<String> areas;
+  final Function clearProducts;
 
-  const AreasList({Key key, @required this.areas}) : super(key: key);
+  const AreasList({Key key, this.isLoading, this.areas, this.clearProducts})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    areas.remove('Unknown');
-    areas.add('Others');
-    return AppLoading(builder: (context, isLoading) {
-      return isLoading ? LoadingIndicator() : getAreasListView();
-    });
+    if (areas.contains('Unknown')) areas.remove('Unknown');
+    if (!areas.contains('Others')) areas.add('Others');
+    return isLoading ? LoadingIndicator() : getAreasListView();
   }
 
   ListView getAreasListView() => ListView.builder(
@@ -28,7 +30,12 @@ class AreasList extends StatelessWidget {
       ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
           onTap: () {
-            Navigator.of(context).pushNamed('/home');
+            clearProducts();
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => ProductsView(
+                      filter: ProductsFilter.country,
+                      filters: [areas[i]],
+                    )));
           },
           leading: Image.network(
             _getLinkForCountryFlag(areas[i]),

@@ -6,15 +6,42 @@ import 'package:shop/models/product_model.dart';
 
 @immutable
 class AppState {
+  // Initial loading launches on app start and loads popular products,
+  // meal categories and areas
   final bool isInitialLoading;
+
+  // Popular products is products that shows on app start in Dashboard tab
   final List<ProductModel> popularProducts;
+
+  // Meal categories in categories tab, e.g. Beef, Chicken, Desert
   final List<CategoryModel> categories;
+
+  // Counties in categories tab, e.g.: American, British, Canadian
   final List<String> areas;
+
+  // Used to show progress indicator during favorites is loading
   final bool isFavouritesLoading;
+
+  // Contains favorite products that downloaded one by one from web with saved ids
   final List<ProductModel> favouriteProducts;
+
+  // Contains favorite product's ids that user marked with like button
   final List<String> favouriteProductsIds;
+
+  // Contains products that user added to cart and want to buy
+  // TODO save cartItems in shared prefs or db
   final List<CartModel> cartItems;
+
+  // Active tab that user observes now. BottomNavigationBar items
+  // One of [Dashboard, Categories, Favorites, Profile]
   final AppTab activeTab;
+
+  // Used to show loading indicator for current loading products
+  final bool isProductsLoading;
+
+  // Contains products that user want to observe.
+  // E.g. products of specific category or filtered products
+  final List<ProductModel> products;
 
   AppState(
       {this.isInitialLoading = false,
@@ -25,7 +52,9 @@ class AppState {
       this.favouriteProducts = const [],
       this.favouriteProductsIds = const [],
       this.cartItems = const [],
-      this.activeTab = AppTab.home});
+      this.activeTab = AppTab.home,
+      this.isProductsLoading = false,
+      this.products = const []});
 
   factory AppState.initialLoading() => AppState(isInitialLoading: true);
 
@@ -38,7 +67,9 @@ class AppState {
       List<ProductModel> favouriteProducts,
       List<String> favouriteProductsIds,
       List<CartModel> cartItems,
-      AppTab activeTab}) {
+      AppTab activeTab,
+      bool isProductsLoading,
+      List<ProductModel> products}) {
     return AppState(
         isInitialLoading: isInitialLoading ?? this.isInitialLoading,
         popularProducts: popularProducts ?? this.popularProducts,
@@ -48,7 +79,9 @@ class AppState {
         favouriteProducts: favouriteProducts ?? this.favouriteProducts,
         favouriteProductsIds: favouriteProductsIds ?? this.favouriteProductsIds,
         cartItems: cartItems ?? this.cartItems,
-        activeTab: activeTab ?? this.activeTab);
+        activeTab: activeTab ?? this.activeTab,
+        isProductsLoading: isProductsLoading ?? this.isProductsLoading,
+        products: products ?? this.products);
   }
 
   @override
@@ -64,7 +97,9 @@ class AppState {
           favouriteProducts == other.favouriteProducts &&
           favouriteProductsIds == other.favouriteProductsIds &&
           cartItems == other.cartItems &&
-          activeTab == other.activeTab;
+          activeTab == other.activeTab &&
+          isProductsLoading == other.isProductsLoading &&
+          products == other.products;
 
   @override
   int get hashCode =>
@@ -76,18 +111,12 @@ class AppState {
       favouriteProducts.hashCode ^
       favouriteProductsIds.hashCode ^
       cartItems.hashCode ^
-      activeTab.hashCode;
+      activeTab.hashCode ^
+      isProductsLoading.hashCode ^
+      products.hashCode;
 
   @override
   String toString() {
-    return 'AppState{isInitialLoading: $isInitialLoading, '
-        'popularProducts: ${popularProducts.length}, '
-        'categories: ${categories.length}, '
-        'areas: ${areas.length}, '
-        'isFavouritesLoading: $isFavouritesLoading '
-        'favouriteProducts: $favouriteProducts, '
-        'favouriteProductsIds: $favouriteProductsIds, '
-        'cartItems: ${cartItems.length}, '
-        'activeTab: $activeTab}';
+    return 'AppState{isInitialLoading: $isInitialLoading, popularProducts: $popularProducts, categories: $categories, areas: $areas, isFavouritesLoading: $isFavouritesLoading, favouriteProducts: $favouriteProducts, favouriteProductsIds: $favouriteProductsIds, cartItems: $cartItems, activeTab: $activeTab, isProductsLoading: $isProductsLoading, products: $products}';
   }
 }

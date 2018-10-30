@@ -12,4 +12,5 @@ class AppKeys {
   static final profileTab = const Key('__profileTab__');
 
   static final popularProductsLoading = const Key('__popularProductsLoading__');
+  static final categoryProductsLoading = const Key('__categoryProductsLoading__');
 }

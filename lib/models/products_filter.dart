@@ -1,0 +1,1 @@
+enum ProductsFilter { meal, country, ingredient }

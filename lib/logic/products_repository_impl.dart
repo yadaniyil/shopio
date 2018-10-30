@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop/logic/products_repository.dart';
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/product_model.dart';
+import 'package:shop/models/products_filter.dart';
 
 class ProductsRepositoryImpl extends ProductsRepository {
   const ProductsRepositoryImpl();
@@ -17,9 +18,30 @@ class ProductsRepositoryImpl extends ProductsRepository {
     String latestProductsUrl =
         'https://www.themealdb.com/api/json/v1/1/latest.php';
     http.Response response = await http.get(latestProductsUrl);
-    List categoriesJson = json.decode(response.body)['meals'];
+    List popularProductsJson = json.decode(response.body)['meals'];
     List<ProductModel> products = List();
-    categoriesJson.forEach((json) => products.add(ProductModel.fromJson(json)));
+    popularProductsJson.forEach((json) => products.add(ProductModel.fromJson(json)));
+
+    return products;
+  }
+
+  @override
+  Future<List<ProductModel>> loadProducts(ProductsFilter filter,
+      List<String> filters) async {
+    String productsUrl = '';
+    if (filter == ProductsFilter.meal) {
+      productsUrl =
+      'https://www.themealdb.com/api/json/v1/1/filter.php?c=${filters[0]}';
+    } else if (filter == ProductsFilter.country) {
+      productsUrl =
+      'https://www.themealdb.com/api/json/v1/1/filter.php?a=${filters[0]}';
+    } else if (filter == ProductsFilter.ingredient) {
+      // TODO ingredients
+    }
+    http.Response response = await http.get(productsUrl);
+    List productsJson = json.decode(response.body)['meals'];
+    List<ProductModel> products = List();
+    productsJson.forEach((json) => products.add(ProductModel.fromJson(json)));
 
     return products;
   }
@@ -41,8 +63,7 @@ class ProductsRepositoryImpl extends ProductsRepository {
     http.Response response = await http.get(dataURL);
     List areasJson = json.decode(response.body)['meals'];
     List<String> areas = List();
-    areasJson
-        .forEach((json) => areas.add(json['strArea']));
+    areasJson.forEach((json) => areas.add(json['strArea']));
     return areas;
   }
 

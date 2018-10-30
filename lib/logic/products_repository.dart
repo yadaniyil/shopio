@@ -1,13 +1,16 @@
-
 import 'dart:async';
 
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/product_model.dart';
+import 'package:shop/models/products_filter.dart';
 
 abstract class ProductsRepository {
   const ProductsRepository();
 
   Future<List<ProductModel>> loadPopularProducts();
+
+  Future<List<ProductModel>> loadProducts(
+      ProductsFilter filter, List<String> filters);
 
   Future<List<CategoryModel>> loadCategories();
 
@@ -22,5 +25,4 @@ abstract class ProductsRepository {
   Future<bool> removeFromFavorites(String productId);
 
   Future<List<String>> loadFavouriteIds();
-
 }

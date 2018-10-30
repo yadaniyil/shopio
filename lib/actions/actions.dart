@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:shop/models/app_tab.dart';
 import 'package:shop/models/category_model.dart';
 import 'package:shop/models/product_model.dart';
+import 'package:shop/models/products_filter.dart';
 
 // region Initial Load
 class InitialLoadAction {}
@@ -51,6 +52,64 @@ class PopularProductsRefreshedAction {
 
 class PopularProductsNotRefreshedAction {}
 // endregion Refresh Popular Product
+
+// region Products
+class LoadProductsAction {
+  final ProductsFilter productsFilter;
+  final List<String> filters;
+
+  LoadProductsAction(this.productsFilter, this.filters);
+
+  @override
+  String toString() {
+    return 'LoadProductsAction{productsFilter: $productsFilter, filters: $filters}';
+  }
+}
+
+class ProductsLoadedAction {
+  final List<ProductModel> products;
+
+  ProductsLoadedAction(this.products);
+
+  @override
+  String toString() {
+    return 'ProductsLoadedAction{products: $products}';
+  }
+}
+
+class ProductsNotLoadedAction {
+  final Exception exception;
+
+  ProductsNotLoadedAction(this.exception);
+
+  @override
+  String toString() {
+    return 'ProductsNotLoadedAction{exception: $exception}';
+  }
+}
+
+class RefreshProductsAction {
+  final Completer<Null> completer;
+
+  RefreshProductsAction({Completer completer})
+      : this.completer = completer ?? Completer<Null>();
+}
+
+class ProductsRefreshedAction {
+  final List<ProductModel> products;
+
+  ProductsRefreshedAction(this.products);
+
+  @override
+  String toString() {
+    return 'ProductsRefreshedAction{products: $products}';
+  }
+}
+
+class ProductsNotRefreshedAction {}
+
+class ClearProductsAction {}
+// endregion Products
 
 // region Bottom Bar Tabs
 class UpdateTabAction {

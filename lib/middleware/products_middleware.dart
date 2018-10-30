@@ -17,6 +17,7 @@ List<Middleware<AppState>> createProductsMiddleware([
   final loadFavouriteProducts = _createLoadFavouriteProducts(repository);
   final saveFavouriteProduct = _createSaveFavouriteProduct(repository);
   final removeFavouriteProducts = _createRemoveFavouriteProduct(repository);
+  final loadProducts = _createLoadProducts(repository);
 
   return [
     LoggingMiddleware.printer(),
@@ -27,6 +28,7 @@ List<Middleware<AppState>> createProductsMiddleware([
     TypedMiddleware<AppState, SaveToFavouritesAction>(saveFavouriteProduct),
     TypedMiddleware<AppState, RemoveFromFavouritesAction>(
         removeFavouriteProducts),
+    TypedMiddleware<AppState, LoadProductsAction>(loadProducts),
   ];
 }
 
@@ -115,6 +117,21 @@ Middleware<AppState> _createRemoveFavouriteProduct(
     if (action is RemoveFromFavouritesAction) {
       repository.removeFromFavorites(action.productId);
     }
+    next(action);
+  };
+}
+
+Middleware<AppState> _createLoadProducts(ProductsRepository repository) {
+  return (Store<AppState> store, action, NextDispatcher next) {
+    repository.loadProducts(action.productsFilter, action.filters).then(
+      (products) {
+        store.dispatch(
+          ProductsLoadedAction(products),
+        );
+      },
+    ).catchError((error) {
+      store.dispatch(ProductsNotLoadedAction(error));
+    });
     next(action);
   };
 }
