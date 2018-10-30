@@ -9,7 +9,7 @@ import 'package:shop/routes.dart';
 
 import 'colors.dart';
 import 'reducers/app_state_reducer.dart';
-import 'screens/home/home_screen.dart';
+import 'package:shop/presentation/home_screen.dart';
 
 void main() {
   runApp(ShopApp());

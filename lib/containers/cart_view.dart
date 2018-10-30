@@ -5,7 +5,7 @@ import 'package:shop/actions/actions.dart';
 import 'package:shop/models/app_state.dart';
 import 'package:shop/models/cart_model.dart';
 import 'package:shop/models/product_model.dart';
-import 'package:shop/screens/cart/cart_screen.dart';
+import 'package:shop/presentation/cart_screen.dart';
 
 class CartView extends StatelessWidget {
   CartView({Key key}) : super(key: key);

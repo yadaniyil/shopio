@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:shop/models/app_state.dart';
 import 'package:shop/presentation/cart_and_search_toolbar.dart';
-import 'package:shop/screens/home/profile_content.dart';
+import 'package:shop/presentation/profile_content.dart';
 
 class ProfileView extends StatelessWidget {
   @override
