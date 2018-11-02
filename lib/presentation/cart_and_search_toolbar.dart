@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:flutter/material.dart';
 import 'package:shop/containers/cart_quantity.dart';
 
 AppBar cartAndSearchToolbar(

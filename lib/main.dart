@@ -28,7 +28,7 @@ class ShopApp extends StatelessWidget {
       store: store,
       child: MaterialApp(
           title: 'Shop',
-          theme: shopTheme,
+          theme: _buildShopTheme(),
           routes: {
             Routes.home: (context) {
               return StoreBuilder<AppState>(
@@ -41,8 +41,6 @@ class ShopApp extends StatelessWidget {
     );
   }
 }
-
-final ThemeData shopTheme = _buildShopTheme();
 
 ThemeData _buildShopTheme() {
   final ThemeData base = ThemeData.light();

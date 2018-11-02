@@ -20,21 +20,22 @@ class ProductsRepositoryImpl extends ProductsRepository {
     http.Response response = await http.get(latestProductsUrl);
     List popularProductsJson = json.decode(response.body)['meals'];
     List<ProductModel> products = List();
-    popularProductsJson.forEach((json) => products.add(ProductModel.fromJson(json)));
+    popularProductsJson
+        .forEach((json) => products.add(ProductModel.fromJson(json)));
 
     return products;
   }
 
   @override
-  Future<List<ProductModel>> loadProducts(ProductsFilter filter,
-      List<String> filters) async {
+  Future<List<ProductModel>> loadProducts(
+      ProductsFilter filter, List<String> filters) async {
     String productsUrl = '';
     if (filter == ProductsFilter.meal) {
       productsUrl =
-      'https://www.themealdb.com/api/json/v1/1/filter.php?c=${filters[0]}';
+          'https://www.themealdb.com/api/json/v1/1/filter.php?c=${filters[0]}';
     } else if (filter == ProductsFilter.country) {
       productsUrl =
-      'https://www.themealdb.com/api/json/v1/1/filter.php?a=${filters[0]}';
+          'https://www.themealdb.com/api/json/v1/1/filter.php?a=${filters[0]}';
     } else if (filter == ProductsFilter.ingredient) {
       // TODO ingredients
     }
@@ -120,5 +121,11 @@ class ProductsRepositoryImpl extends ProductsRepository {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var ids = preferences.getStringList(FAVOURITES_IDS);
     return ids ?? List();
+  }
+
+  @override
+  Future<ProductModel> loadProduct() {
+//    String productUrl =
+//        'https://www.themealdb.com/api/json/v1/1/lookup.php?i=$productId';
   }
 }

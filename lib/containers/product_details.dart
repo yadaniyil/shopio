@@ -14,6 +14,11 @@ class ProductDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector(
+      onInit: (store) {
+        if (product.sourceLink == null) {
+          store.dispatch(LoadProductAction(product.id));
+        }
+      },
       converter: (Store<AppState> store) {
         return _ViewModel.from(store, product);
       },
@@ -46,7 +51,7 @@ class _ViewModel {
 
   static _ViewModel from(Store<AppState> store, ProductModel product) {
     return _ViewModel(
-        product: product,
+        product: product.sourceLink == null ? store.state.product : product,
         onAddToFavourites: () {
           store.dispatch(SaveToFavouritesAction(product.id));
         },

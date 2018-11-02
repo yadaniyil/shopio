@@ -111,6 +111,26 @@ class ProductsNotRefreshedAction {}
 class ClearProductsAction {}
 // endregion Products
 
+// region Product
+class LoadProductAction {
+  final String id;
+
+  LoadProductAction(this.id);
+}
+
+class ProductLoadedAction {
+  final ProductModel product;
+
+  ProductLoadedAction(this.product);
+}
+
+class ProductNotLoadedAction {
+  final Error error;
+
+  ProductNotLoadedAction(this.error);
+}
+// endregion Product
+
 // region Bottom Bar Tabs
 class UpdateTabAction {
   final AppTab newTab;

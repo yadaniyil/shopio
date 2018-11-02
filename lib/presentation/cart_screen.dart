@@ -19,14 +19,10 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _getBody();
-  }
-
-  Widget _getBody() {
     if (cartProducts.isEmpty) {
       return _noCartItems;
     } else {
-      return _cartItems;
+      return _cartItems(context);
     }
   }
 
@@ -44,7 +40,7 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget get _cartItems {
+  _cartItems(BuildContext context) {
     return Container(
       color: Colors.grey[100],
       child: Column(
@@ -86,6 +82,7 @@ class CartScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 4.0),
                   RaisedButton(
+                    color: Theme.of(context).accentColor,
                     onPressed: () {},
                     child: Text('Proceed to checkout'),
                     textColor: Colors.white,

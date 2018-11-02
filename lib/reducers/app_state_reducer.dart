@@ -10,6 +10,7 @@ import 'cart_reducer.dart';
 import 'areas_reducer.dart';
 import 'products_loading_reducer.dart';
 import 'products_reducer.dart';
+import 'product_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
@@ -27,5 +28,6 @@ AppState appReducer(AppState state, action) {
         favouriteIdsReducer(state.favouriteProductsIds, action),
     cartItems: cartReducer(state.cartItems, action),
     activeTab: tabsReducer(state.activeTab, action),
+    product: productReducer(state.product, action)
   );
 }

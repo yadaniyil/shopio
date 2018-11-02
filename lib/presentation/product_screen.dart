@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop/models/product_model.dart';
 import 'package:shop/presentation/cart_and_search_toolbar.dart';
+import 'package:shop/presentation/loading_indicator.dart';
 
 class ProductScreen extends StatelessWidget {
   final ProductModel product;
@@ -26,21 +27,25 @@ class ProductScreen extends StatelessWidget {
 
     return Scaffold(
         appBar: cartAndSearchToolbar(
-            title: product.name,
-            context: context,
-            implyLeading: true),
-        body: ListView(
-          children: [
-            foodPicture,
-            titleSection(theme, isFavourite),
-            Divider(),
-            tagsSection,
-            Divider(),
-            addToCartButton,
-            ingredients,
-            instructions
-          ],
-        ));
+            title: product.name, context: context, implyLeading: true),
+        body: product.sourceLink == null
+            ? LoadingIndicator()
+            : _productDetails(theme, isFavourite, context));
+  }
+
+  _productDetails(ThemeData theme, bool isFavourite, BuildContext context) {
+    return ListView(
+      children: [
+        foodPicture,
+        titleSection(theme, isFavourite),
+        Divider(),
+        tagsSection,
+        Divider(),
+        _addToCartButton(context),
+        ingredients,
+        instructions
+      ],
+    );
   }
 
   Widget get foodPicture {
@@ -104,10 +109,11 @@ class ProductScreen extends StatelessWidget {
             .toList());
   }
 
-  Widget get addToCartButton {
+  _addToCartButton(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: RaisedButton(
+        color: Theme.of(context).accentColor,
           onPressed: onAddToCart,
           child: Text('ADD TO CART', style: TextStyle(fontSize: 14.0)),
           textColor: Colors.white,

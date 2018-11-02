@@ -43,6 +43,11 @@ class AppState {
   // E.g. products of specific category or filtered products
   final List<ProductModel> products;
 
+  // Contains product that is loaded from the network.
+  // This is used in situations when only name and picture of product is pulled
+  // from the api but user wants to get product details
+  final ProductModel product;
+
   AppState(
       {this.isInitialLoading = false,
       this.popularProducts = const [],
@@ -54,7 +59,8 @@ class AppState {
       this.cartItems = const [],
       this.activeTab = AppTab.home,
       this.isProductsLoading = false,
-      this.products = const []});
+      this.products = const [],
+      this.product = null});
 
   factory AppState.initialLoading() => AppState(isInitialLoading: true);
 
@@ -69,7 +75,8 @@ class AppState {
       List<CartModel> cartItems,
       AppTab activeTab,
       bool isProductsLoading,
-      List<ProductModel> products}) {
+      List<ProductModel> products,
+      ProductModel product}) {
     return AppState(
         isInitialLoading: isInitialLoading ?? this.isInitialLoading,
         popularProducts: popularProducts ?? this.popularProducts,
@@ -81,7 +88,8 @@ class AppState {
         cartItems: cartItems ?? this.cartItems,
         activeTab: activeTab ?? this.activeTab,
         isProductsLoading: isProductsLoading ?? this.isProductsLoading,
-        products: products ?? this.products);
+        products: products ?? this.products,
+        product: product ?? this.product);
   }
 
   @override
@@ -99,7 +107,8 @@ class AppState {
           cartItems == other.cartItems &&
           activeTab == other.activeTab &&
           isProductsLoading == other.isProductsLoading &&
-          products == other.products;
+          products == other.products &&
+          product == other.product;
 
   @override
   int get hashCode =>
@@ -113,10 +122,11 @@ class AppState {
       cartItems.hashCode ^
       activeTab.hashCode ^
       isProductsLoading.hashCode ^
-      products.hashCode;
+      products.hashCode ^
+      product.hashCode;
 
   @override
   String toString() {
-    return 'AppState{isInitialLoading: $isInitialLoading, popularProducts: $popularProducts, categories: $categories, areas: $areas, isFavouritesLoading: $isFavouritesLoading, favouriteProducts: $favouriteProducts, favouriteProductsIds: $favouriteProductsIds, cartItems: $cartItems, activeTab: $activeTab, isProductsLoading: $isProductsLoading, products: $products}';
+    return 'AppState{isInitialLoading: $isInitialLoading, popularProducts: $popularProducts, categories: $categories, areas: $areas, isFavouritesLoading: $isFavouritesLoading, favouriteProducts: $favouriteProducts, favouriteProductsIds: $favouriteProductsIds, cartItems: $cartItems, activeTab: $activeTab, isProductsLoading: $isProductsLoading, products: $products, product: $product}';
   }
 }

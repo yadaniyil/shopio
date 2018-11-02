@@ -1,6 +1,5 @@
 import 'package:redux/redux.dart';
 import 'package:shop/actions/actions.dart';
-import 'package:shop/models/category_model.dart';
 
 final areasReducer = combineReducers<List<String>>([
   TypedReducer<List<String>, InitialLoadedAction>(
