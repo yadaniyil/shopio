@@ -36,6 +36,7 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
   final String dateModified;
 
   String price;
+  int percent;
 
   // Ingredients. 20 is max. "" if no ingredient
   @JsonKey(name: 'strIngredient1')
@@ -186,5 +187,18 @@ class ProductModel extends Object with _$ProductModelSerializerMixin {
 
   double getPriceDouble() {
     return double.tryParse(getPrice().substring(1)) ?? (0.0);
+  }
+
+  String getOptionalLabel() {
+    if (percent == null) {
+      percent = Random().nextInt(100);
+    }
+    if (percent < 10) {
+      return 'New';
+    } else if (percent > 10 && percent < 20) {
+      return 'Sale';
+    } else {
+      return null;
+    }
   }
 }
